@@ -1,0 +1,80 @@
+name: Localize vehicle images
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/localize-images.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  localize:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Download and localize vehicle images
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re, hashlib, urllib.request, time
+
+          targets = [Path(f'page-{i}.txt') for i in range(1,6)] + [Path('style.css'), Path('app.js')]
+          pattern = re.compile(r'https://(?:www\.gelgezgor\.com/uploads/images|domcar\.com\.cy/upload/resize_cache/iblock)/[^\"\'\s)]+')
+          texts = {p: p.read_text(encoding='utf-8') for p in targets if p.exists()}
+          urls = []
+          for t in texts.values():
+              for u in pattern.findall(t):
+                  if u not in urls:
+                      urls.append(u)
+
+          assets = Path('assets')
+          assets.mkdir(exist_ok=True)
+          mapping = {}
+          for n,u in enumerate(urls,1):
+              name = hashlib.sha1(u.encode()).hexdigest()[:14] + '.jpg'
+              dest = assets / name
+              req = urllib.request.Request(u, headers={
+                  'User-Agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/130 Safari/537.36',
+                  'Accept':'image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8',
+                  'Referer':'https://www.google.com/'
+              })
+              try:
+                  with urllib.request.urlopen(req, timeout=35) as r:
+                      data = r.read()
+                  if len(data) < 3000:
+                      raise RuntimeError(f'image too small: {len(data)} bytes')
+                  dest.write_bytes(data)
+                  mapping[u] = str(dest).replace('\\','/')
+                  print(f'[{n}/{len(urls)}] OK {u} -> {dest} ({len(data)} bytes)')
+              except Exception as e:
+                  print(f'[{n}/{len(urls)}] FAILED {u}: {e}')
+              time.sleep(.3)
+
+          for p,text in texts.items():
+              for old,new in mapping.items():
+                  text = text.replace(old,new)
+              p.write_text(text, encoding='utf-8')
+
+          print(f'Localized {len(mapping)} / {len(urls)} unique images')
+          if not mapping:
+              raise SystemExit('No images could be localized')
+          PY
+      - name: Commit localized images
+        run: |
+          git config user.name "northmedia-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add assets page-*.txt style.css app.js
+          if git diff --cached --quiet; then
+            echo "No changes"
+          else
+            git commit -m "Localize vehicle images"
+            git push origin main
+          fi
