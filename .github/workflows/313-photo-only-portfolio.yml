@@ -1,0 +1,34 @@
+name: Show only photo-backed 313 Cars portfolio
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/313-photo-only-portfolio.yml']
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Patch portfolio to verified-photo vehicles only
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('313cars/index.html')
+          s=p.read_text(encoding='utf-8')
+          old="function render(){let list=cars;if(filter==='Hibrit')list=cars.filter(c=>c.fuel.includes('Hibrit'));else if(filter!=='all')list=cars.filter(c=>c.cat===filter);stock.innerHTML=list.map(card).join('')}"
+          new="function render(){let list=cars.filter(c=>c.img);if(filter==='Hibrit')list=list.filter(c=>c.fuel.includes('Hibrit'));else if(filter!=='all')list=list.filter(c=>c.cat===filter);stock.innerHTML=list.map(card).join('')}"
+          s=s.replace(old,new)
+          old2="const list=cars.filter(c=>(!q||(`${c.brand} ${c.title}`).toLowerCase().includes(q))&&(!cat||c.cat===cat)&&(!fuel||c.fuel===fuel));"
+          new2="const list=cars.filter(c=>c.img&&(!q||(`${c.brand} ${c.title}`).toLowerCase().includes(q))&&(!cat||c.cat===cat)&&(!fuel||c.fuel===fuel));"
+          s=s.replace(old2,new2)
+          s=s.replace('Gerçek stok. Daha güçlü sunum.','Gerçek stok. Gerçek fotoğraflar. Daha güçlü sunum.')
+          p.write_text(s,encoding='utf-8')
+          PY
+      - name: Commit
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add 313cars/index.html
+          if git diff --cached --quiet; then echo nochange; else git commit -m 'Show verified-photo vehicles in 313 Cars portfolio'; git push; fi
