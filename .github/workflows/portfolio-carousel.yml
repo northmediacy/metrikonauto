@@ -1,0 +1,80 @@
+name: Portfolio and hero carousel update
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/portfolio-carousel.yml']
+permissions:
+  contents: write
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Update portfolio and hero carousel
+        shell: python
+        run: |
+          from pathlib import Path
+          p=Path('index.html')
+          s=p.read_text(encoding='utf-8')
+
+          # Larger portfolio cards: 3 columns desktop, bigger spacing and image area.
+          s=s.replace('.stock{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}', '.stock{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}')
+          s=s.replace('.vehicle{overflow:hidden;border-radius:22px;border:1px solid var(--line);background:var(--panel)}', '.vehicle{overflow:hidden;border-radius:26px;border:1px solid var(--line);background:var(--panel);box-shadow:0 24px 55px rgba(0,0,0,.24)}')
+          s=s.replace('.vm{aspect-ratio:4/3;position:relative;overflow:hidden}', '.vm{aspect-ratio:16/10;position:relative;overflow:hidden}')
+          s=s.replace('.vb{padding:17px}', '.vb{padding:22px}')
+          s=s.replace('.vb h4{font-size:20px;margin:8px 0 12px}', '.vb h4{font-size:24px;margin:10px 0 14px}')
+          s=s.replace('.spec{display:grid;grid-template-columns:1fr 1fr;gap:9px;color:var(--muted);font-size:12px}', '.spec{display:grid;grid-template-columns:1fr 1fr;gap:12px;color:var(--muted);font-size:13px}')
+          s=s.replace('.spec b{display:block;color:var(--text);font-size:13px;margin-top:2px}', '.spec b{display:block;color:var(--text);font-size:14px;margin-top:3px}')
+
+          # Hero carousel: keep the current visual but convert it to a centered multi-car slider.
+          old='<div class="visual"><div class="float f1"><img src="assets/gladiator.jpg"></div><div class="main"><img src="assets/glecoupe.jpg"></div><div class="float f2"><img src="assets/mt09.jpg"></div><div class="note"><b>Metrikon’a özel dijital showroom</b><p>Marka algısını, güven duygusunu ve satış performansını aynı yapıda güçlendiren özel web deneyimi.</p></div></div>'
+          new='<div class="visual heroCarousel" id="heroCarousel"><button class="heroArrow heroPrev" type="button" aria-label="Önceki araç">‹</button><div class="main heroMain"><img id="heroCarImg" src="assets/glecoupe.jpg" alt="Mercedes-Benz GLE Coupe"><div class="heroCarInfo"><span id="heroCarCount">01 / 07</span><strong id="heroCarName">Mercedes-Benz GLE Coupe</strong><small>Öne çıkan Metrikon seçkisi</small></div></div><button class="heroArrow heroNext" type="button" aria-label="Sonraki araç">›</button><div class="heroDots" id="heroDots"></div><div class="note"><b>Seçili araç vitrini</b><p>Oklarla Metrikon’un öne çıkan araçları arasında geçiş yapabilirsiniz.</p></div></div>'
+          if old in s:
+              s=s.replace(old,new,1)
+          elif 'id="heroCarousel"' not in s:
+              raise SystemExit('Hero visual block not found')
+
+          extra_css='''<style>/* NM_PORTFOLIO_CAROUSEL */
+          .heroCarousel{min-height:590px;padding:0 42px 72px}.heroCarousel .heroMain{inset:20px 42px 82px 42px;transition:.35s ease}.heroCarousel .heroMain img{transition:opacity .28s ease,transform .65s ease}.heroCarousel .heroMain.changing img{opacity:.15;transform:scale(1.02)}.heroArrow{position:absolute;top:44%;transform:translateY(-50%);z-index:8;width:52px;height:52px;border-radius:50%;border:1px solid rgba(201,167,106,.38);background:rgba(8,9,12,.82);color:#f2ddb4;font-size:34px;line-height:1;cursor:pointer;backdrop-filter:blur(10px);box-shadow:0 16px 34px rgba(0,0,0,.28);transition:.22s}.heroArrow:hover{background:linear-gradient(135deg,var(--gold2),var(--gold));color:#171108;transform:translateY(-50%) scale(1.06)}.heroPrev{left:2px}.heroNext{right:2px}.heroCarInfo{position:absolute;left:24px;right:24px;bottom:24px;z-index:4;display:flex;align-items:end;gap:13px;flex-wrap:wrap}.heroCarInfo span{color:#e7c98f;font-size:11px;font-weight:800;letter-spacing:.14em}.heroCarInfo strong{font-size:25px;letter-spacing:-.02em}.heroCarInfo small{width:100%;color:#c9c0b2;font-size:12px}.heroDots{position:absolute;left:50%;bottom:41px;transform:translateX(-50%);z-index:9;display:flex;gap:8px}.heroDot{width:8px;height:8px;border-radius:999px;border:0;background:rgba(255,255,255,.28);padding:0;cursor:pointer;transition:.25s}.heroDot.active{width:28px;background:var(--gold)}.heroCarousel .note{left:50%;transform:translateX(-50%);bottom:0;max-width:390px;text-align:center}.heroCarousel .float{display:none}
+          @media(max-width:1050px){.stock{grid-template-columns:repeat(2,1fr)}.heroCarousel{min-height:520px}.heroCarousel .heroMain{inset:20px 38px 78px}}
+          @media(max-width:720px){.stock{grid-template-columns:1fr}.vehicle{border-radius:24px}.vb{padding:20px}.heroCarousel{min-height:430px;padding:0 28px 70px}.heroCarousel .heroMain{inset:16px 28px 82px}.heroArrow{width:44px;height:44px;font-size:28px}.heroPrev{left:0}.heroNext{right:0}.heroCarInfo{left:16px;right:16px;bottom:18px}.heroCarInfo strong{font-size:19px}.heroDots{bottom:42px}.heroCarousel .note{left:10px;right:10px;transform:none;max-width:none}}
+          </style>'''
+          if '/* NM_PORTFOLIO_CAROUSEL */' not in s:
+              s=s.replace('</head>', extra_css+'</head>',1)
+
+          extra_js='''<script>/* NM_PORTFOLIO_CAROUSEL */
+          (function(){
+            const slides=[
+              {img:'assets/glecoupe.jpg',name:'Mercedes-Benz GLE Coupe'},
+              {img:'assets/gladiator.jpg',name:'Jeep Gladiator'},
+              {img:'assets/hilux.jpg',name:'Toyota Hilux'},
+              {img:'assets/canam.jpg',name:'Can-Am Maverick X3'},
+              {img:'assets/cx8.jpg',name:'Mazda CX-8'},
+              {img:'assets/mt09.jpg',name:'Yamaha MT-09'},
+              {img:'assets/duke.jpg',name:'KTM 390 Duke'}
+            ];
+            const root=document.getElementById('heroCarousel');
+            if(!root)return;
+            const img=document.getElementById('heroCarImg');
+            const name=document.getElementById('heroCarName');
+            const count=document.getElementById('heroCarCount');
+            const dots=document.getElementById('heroDots');
+            const main=root.querySelector('.heroMain');
+            let i=0,timer;
+            slides.forEach((_,n)=>{const b=document.createElement('button');b.className='heroDot'+(n===0?' active':'');b.type='button';b.setAttribute('aria-label',(n+1)+'. aracı göster');b.onclick=()=>show(n);dots.appendChild(b)});
+            function show(n){i=(n+slides.length)%slides.length;main.classList.add('changing');setTimeout(()=>{img.src=slides[i].img;img.alt=slides[i].name;name.textContent=slides[i].name;count.textContent=String(i+1).padStart(2,'0')+' / '+String(slides.length).padStart(2,'0');[...dots.children].forEach((d,k)=>d.classList.toggle('active',k===i));main.classList.remove('changing')},150);restart()}
+            function restart(){clearInterval(timer);timer=setInterval(()=>show(i+1),5500)}
+            root.querySelector('.heroPrev').onclick=()=>show(i-1);root.querySelector('.heroNext').onclick=()=>show(i+1);root.addEventListener('mouseenter',()=>clearInterval(timer));root.addEventListener('mouseleave',restart);restart();
+          })();
+          </script>'''
+          if s.count('/* NM_PORTFOLIO_CAROUSEL */')<2:
+              s=s.replace('</body>', extra_js+'</body>',1)
+
+          p.write_text(s,encoding='utf-8')
+      - name: Commit changes
+        run: |
+          git config user.name 'northmedia-bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add index.html
+          git commit -m 'Enlarge portfolio cards and add hero carousel' || exit 0
+          git push origin main
