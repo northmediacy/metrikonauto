@@ -1,0 +1,37 @@
+name: Build final vehicle assets
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/final-assets.yml']
+permissions:
+  contents: write
+jobs:
+  assets:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download stable vehicle photos
+        shell: bash
+        run: |
+          set -e
+          mkdir -p assets
+          dl(){ out="$1"; shift; for u in "$@"; do echo "Fetching $out"; if curl -fL --retry 3 --connect-timeout 15 --max-time 90 -A 'Mozilla/5.0' "$u" -o "assets/$out.tmp"; then if [ $(wc -c < "assets/$out.tmp") -gt 15000 ]; then mv "assets/$out.tmp" "assets/$out"; return 0; fi; fi; done; echo "FAILED $out"; return 1; }
+          dl gladiator.jpg 'https://d3epdvpm6m1atm.cloudfront.net/billion/vehicleimages/dorthingtondodge_WD1309_01.jpg' 'https://content.homenetiol.com/2000157/2065512/0x0/9be4d2b579a543a8847b853c5b58fd2f.jpg'
+          dl canam.jpg 'https://cloudfront-us-east-1.images.arcpublishing.com/octane/HKDWOAKTORHC7IRCFLNBKM6LZI.jpg' 'https://s1.cdn.autoevolution.com/images/news/gallery/a-first-for-ssvs-2022-can-am-maverick-x3-unleashes-200-hp-on-sand-mud-or-rock_1.jpg'
+          dl hilux.jpg 'https://www.milele.com/wp-content/uploads/2023/10/2024-Toyota-Hilux-DC-2.4D03-10_14-copy-1.jpg' 'https://mursalinmotors.com/uploads/listing_photos/ce9f2430f781d6103acb7c30b4746be6.jpg'
+          dl mt09.jpg 'https://www.totalmotorcycle.com/wp-content/uploads/2025/11/2026-Yamaha-MT-09e.jpg' 'https://cuyomotor.com.ar/wp-content/uploads/2025/08/nueva-yamaha-mt-09-2026-motor-tr.jpg'
+          dl duke.jpg 'https://images.1000ps.net/g-000342-g_W3428492-ktm-390-duke-2026-639104321328993120.jpg'
+          dl cx8.jpg 'https://www.carshowroom.com.au/media/21514658/news-19-mazda-cx-8-brings-some-changes-and-1k-ish-price-hike-gallery-01-0319.jpg' 'https://imgcdnblog.carbay.com/wp-content/uploads/2019/11/11152734/2-138.jpg'
+          dl glecoupe.jpg 'https://www.formulaimports.com/imagetag/282/5/l/Used-2016-Mercedes-Benz-GLE-450-AMG-AWD-PREM-PKG-PARK-ASST-DRVR-ASST-SUNROOF-1582126267.jpg' 'https://images.cars.ng/images/cars-ng/product_ca589313s_2016_gle450_coupe_for_sale_in_abuja_1768465160800_fl6750_2e1733_6.jpg'
+          dl note.jpg 'https://s1.paultan.org/image/2020/11/2021-Nissan-Note-e-Power-12.jpg'
+          dl x5.jpg 'https://www.ssmotors.com.tr/B2ELResim/AracResim2El/18208/acc661e20e2d47cfa2535567fd0083d01406201916373668089_0.jpg'
+          file assets/*
+      - name: Commit vehicle photos
+        run: |
+          git config user.name 'northmedia-bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add assets
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'Add final high quality vehicle photos'
+          git push origin main
