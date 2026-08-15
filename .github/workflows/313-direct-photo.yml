@@ -1,0 +1,51 @@
+name: Download verified 313 Cars photos
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/313-direct-photo.yml']
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  photos:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download verified listing photos
+        run: |
+          mkdir -p 313cars/assets
+          python - <<'PY'
+          import requests, pathlib
+          photos={
+            'navara':'https://www.kktcarabam.com/uploads/images/2026/06/03/00/f04f5259-99cd-4d83-9250-c2e700af0304-6a1f46e359ad8-900_675.jpg',
+            'gti':'https://www.kktcarabam.com/uploads/images/2026/04/19/01/858e9d98-cc6c-44b5-844b-a7b30ada1a07-69e3ff306c9d1-900_675.jpg',
+            'x350':'https://www.kktcarabam.com/uploads/images/2026/04/19/00/242faad4-7bc3-49b7-9584-8e9a8d817c50-69e3fa9d01107-900_675.jpg',
+            'yaris':'https://www.kktcarabam.com/uploads/images/2026/04/19/00/f35785ba-c174-4c7b-bb4b-4e97ede8a007-69e3f4bdaef3d-900_675.jpg',
+            'golf23':'https://www.kktcarabam.com/uploads/images/2025/07/10/19/272eaa5a-c3d5-4a44-8a5d-924a58b2b206-686ff187594ac-900_675.jpg'
+          }
+          s=requests.Session(); s.headers.update({'User-Agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/150 Safari/537.36','Accept':'image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8','Accept-Language':'tr-TR,tr;q=0.9,en;q=0.8'})
+          ok={}
+          for k,u in photos.items():
+            try:
+              r=s.get(u,timeout=30,headers={'Referer':'https://www.kktcarabam.com/'}); print(k,r.status_code,r.headers.get('content-type'),len(r.content))
+              if r.ok and r.content[:2]==b'\xff\xd8' and len(r.content)>10000:
+                p=pathlib.Path('313cars/assets')/(k+'.jpg'); p.write_bytes(r.content); ok[k]='assets/'+p.name
+            except Exception as e: print(k,e)
+          site=pathlib.Path('313cars/index.html'); t=site.read_text(encoding='utf-8')
+          import re
+          for k,p in ok.items():
+            pattern=rf"(\{{id:'{k}'[^\n]*?)(?:,img:[^,}}]+)?(,desc:)"
+            def rep(m):
+              left=re.sub(r",img:[^,}}]+$",'',m.group(1))
+              return left+f",img:'{p}'"+m.group(2)
+            t,n=re.subn(pattern,rep,t,count=1)
+            print('patched',k,n)
+          site.write_text(t,encoding='utf-8')
+          print('TOTAL_OK',len(ok))
+          PY
+      - name: Commit
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add 313cars
+          if git diff --cached --quiet; then echo nochange; else git commit -m 'Localize verified 313 Cars photos'; git push; fi
