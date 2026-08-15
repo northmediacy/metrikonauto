@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Metrikon Automotive | Premium Showroom</title>
+<meta name="description" content="Metrikon Automotive — premium, lüks ve satış odaklı dijital showroom deneyimi.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <div class="wrap nav">
+    <a href="#top" aria-label="Metrikon Automotive"><svg class="brandMark" viewBox="0 0 760 180" aria-label="Metrikon Automotive"><defs><linearGradient id="g1" x1="0" x2="1"><stop stop-color="#f8f2e7"/><stop offset="1" stop-color="#c7a66a"/></linearGradient></defs><path d="M35 56 C145 14, 295 10, 410 14 C520 18, 640 30, 725 58 C650 50, 585 49, 525 50 C485 20, 440 12, 370 10 C275 10, 205 25, 145 56 C112 56,78 56,35 56Z" fill="url(#g1)" opacity=".95"/><text x="58" y="118" font-size="78" font-weight="900" font-family="Arial, sans-serif" letter-spacing="11" fill="url(#g1)">METRIKON</text><text x="102" y="154" font-size="27" font-weight="700" font-family="Arial, sans-serif" letter-spacing="16" fill="#efe7d8">AUTOMOTIVE</text></svg></a>
+    <nav class="navLinks">
+      <a href="#about">Metrikon</a>
+      <a href="#signature">Öne Çıkanlar</a>
+      <a href="#portfolio">Portföy</a>
+      <a href="#leadForm">Araç Talebi</a>
+      <a href="#contact">İletişim</a>
+    </nav>
+    <div class="navCtas">
+      <a class="pill whats" href="https://wa.me/905338539790" target="_blank">WhatsApp’tan Sor</a>
+      <a class="pill call" href="tel:+905338539790">Hemen Ara</a>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="heroBg"></div>
+    <div class="heroShade"></div>
+    <div class="heroGrid"></div>
+    <div class="wrap heroInner">
+      <div class="heroLeft">
+        <svg class="heroLogo" viewBox="0 0 760 180" aria-label="Metrikon Automotive"><defs><linearGradient id="g1" x1="0" x2="1"><stop stop-color="#f8f2e7"/><stop offset="1" stop-color="#c7a66a"/></linearGradient></defs><path d="M35 56 C145 14, 295 10, 410 14 C520 18, 640 30, 725 58 C650 50, 585 49, 525 50 C485 20, 440 12, 370 10 C275 10, 205 25, 145 56 C112 56,78 56,35 56Z" fill="url(#g1)" opacity=".95"/><text x="58" y="118" font-size="78" font-weight="900" font-family="Arial, sans-serif" letter-spacing="11" fill="url(#g1)">METRIKON</text><text x="102" y="154" font-size="27" font-weight="700" font-family="Arial, sans-serif" letter-spacing="16" fill="#efe7d8">AUTOMOTIVE</text></svg>
+        <div class="heroKicker">
+          <span class="chip">Girne / Kuzey Kıbrıs</span>
+          <span class="chip">0 KM & Premium 2. El</span>
+          <span class="chip">WhatsApp ile Hızlı Teklif</span>
+        </div>
+        <h1 class="heroTitle">Beklemeyin.<span>Doğru aracı bugün bulun.</span></h1>
+        <p class="heroSub">Metrikon Automotive olarak sıfır kilometre ve özenle seçilmiş ikinci el araçları yalnızca sergilemiyoruz; hızlı iletişim, güçlü sunum ve satışa dönük net bir deneyimle size ulaştırıyoruz. Portföy değişir, iyi araç beklemez. Siz de vakit kaybetmeden bizimle iletişime geçin.</p>
+        <div class="heroActions">
+          <a class="btn btnPrimary" href="#portfolio">Güncel Portföyü İncele</a>
+          <a class="btn btnGhost" href="#leadForm">Araç Bulma Talebi Oluştur</a>
+          <a class="btn btnDark" href="https://wa.me/905338539790" target="_blank">WhatsApp’tan Portföy İste</a>
+        </div>
+        <div class="heroNote">
+          <span><i class="dot"></i> Hızlı geri dönüş</span>
+          <span><i class="dot"></i> Güçlü araç seçkisi</span>
+          <span><i class="dot"></i> Satış odaklı danışmanlık</span>
+        </div>
+      </div>
+      <div class="heroRight">
+        <article class="showTile big" onclick="openModal('cayenne')"><img src="https://www.gelgezgor.com/uploads/images/2026/07/14/731022418182724097332959995695762370211413443n-6A555A0484418-530_393.jpg" alt="Porsche Cayenne"><div class="showLabel"><small>Signature Choice</small><b>Porsche Cayenne</b></div></article>
+        <article class="showTile" onclick="openModal('gle300d')"><img src="https://www.gelgezgor.com/uploads/images/2026/07/14/734253256182728982232959993372849775245325631n-6A555B8394BD2-530_393.jpg" alt="Mercedes GLE 300d"><div class="showLabel"><small>Luxury Stock</small><b>Mercedes GLE 300d</b></div></article>
+        <article class="showTile" onclick="openModal('x5')"><img src="https://www.gelgezgor.com/uploads/images/2026/07/30/750229534182744731902959993740634086666563111n-6A6BB4A2E8982-530_393.jpg" alt="BMW X5"><div class="showLabel"><small>Performance</small><b>BMW X5</b></div></article>
+        <article class="showTile" onclick="openModal('jeepg')"><img src="https://domcar.com.cy/upload/resize_cache/iblock/b15/640_399_2/b1511ca4f1dfe92409df957653b68da3.jpg" al
