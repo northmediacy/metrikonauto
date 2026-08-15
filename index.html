@@ -1,1 +1,22 @@
-<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Metrikon Automotive</title></head><body style="margin:0;background:#090b0e;color:#fff;font-family:Arial,sans-serif"><div id="loading" style="min-height:100vh;display:grid;place-items:center">Metrikon Automotive yükleniyor…</div><script>Promise.all(['page-1.txt','page-2.txt','page-3.txt','page-4.txt','page-5.txt'].map(x=>fetch(x,{cache:'no-store'}).then(r=>{if(!r.ok)throw new Error(x);return r.text()}))).then(p=>{document.open();document.write(p.join(''));document.close()}).catch(()=>{document.getElementById('loading').textContent='Site yüklenemedi. Lütfen sayfayı yenileyin.'})</script></body></html>
+<!doctype html><html lang="tr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Metrikon Automotive</title><meta name="theme-color" content="#090b0e"></head><body style="margin:0;background:#090b0e;color:#fff;font-family:Arial,sans-serif"><div id="loading" style="min-height:100vh;display:grid;place-items:center;text-align:center;padding:30px"><div><div style="font-size:22px;font-weight:800;letter-spacing:.08em">METRIKON AUTOMOTIVE</div><div style="margin-top:12px;color:#b8b1a5">Premium showroom yükleniyor…</div></div></div><script>
+const proxyImage=u=>{if(!/^https?:\/\//i.test(u))return u;return 'https://images.weserv.nl/?url='+encodeURIComponent(u)+'&output=jpg&q=88'};
+const proxify=s=>s
+.replace(/https:\/\/www\.gelgezgor\.com\/uploads\/images\/[^\"'\s)]+/g,proxyImage)
+.replace(/https:\/\/domcar\.com\.cy\/upload\/resize_cache\/iblock\/[^\"'\s)]+/g,proxyImage);
+Promise.all([
+ ...['page-1.txt','page-2.txt','page-3.txt','page-4.txt','page-5.txt'].map(x=>fetch(x,{cache:'no-store'}).then(r=>{if(!r.ok)throw new Error(x);return r.text()})),
+ fetch('style.css',{cache:'no-store'}).then(r=>{if(!r.ok)throw new Error('style.css');return r.text()}),
+ fetch('app.js',{cache:'no-store'}).then(r=>{if(!r.ok)throw new Error('app.js');return r.text()})
+]).then(all=>{
+ let html=proxify(all.slice(0,5).join(''));
+ const css=proxify(all[5]);
+ const js=proxify(all[6]).replace(/<\/script>/gi,'<\\/script>');
+ html=html.replace('<link rel="stylesheet" href="style.css">','<style>'+css+'</style>');
+ html=html.replace('<script src="app.js"></script>','<script>'+js+'<\/script>');
+ html=html.replace(/<img /g,'<img referrerpolicy="no-referrer" loading="eager" ');
+ document.open();document.write(html);document.close();
+}).catch(e=>{
+ console.error(e);
+ document.getElementById('loading').innerHTML='<div><div style="font-size:20px;font-weight:800">Site yüklenemedi.</div><div style="margin-top:10px;color:#b8b1a5">Lütfen sayfayı yenileyin.</div></div>';
+});
+</script></body></html>
