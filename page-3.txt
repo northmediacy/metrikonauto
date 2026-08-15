@@ -1,0 +1,64 @@
+p>Portföy sürekli değişebilir. Bugün gördüğünüz aracı yarın bulamayabilirsiniz. Hızlı bilgi, fiyat ve müsaitlik için doğrudan bizimle iletişime geçin.</p>
+        </div>
+        <div class="ctaGroup">
+          <a class="btn btnPrimary" href="https://wa.me/905338539790" target="_blank">WhatsApp’tan Sor</a>
+          <a class="btn btnGhost" href="tel:+905338539790">Hemen Ara</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section catalog" id="portfolio">
+    <div class="wrap">
+      <div class="sectionHead">
+        <div>
+          <div class="mini">Güncel Portföy</div>
+          <h2>Bugün satılabilecek<br>araçları görün.</h2>
+        </div>
+        <p>Bu bölüm işlevsel ama yine premium. Ziyaretçi aradığı segmenti bulur, araç kartında yeterli ön bilgiyi alır ve tek tıkla detay veya iletişime geçiş yapar.</p>
+      </div>
+      <div class="filters">
+        <input id="q" type="search" placeholder="Marka veya model ara…">
+        <select id="cat"><option value="">Tüm kategoriler</option><option>Otomobil</option><option>SUV & Pick-up</option><option>Motosiklet</option></select>
+        <select id="status"><option value="">0 KM + 2. El</option><option>0 KM</option><option>2. El</option></select>
+        <div class="count" id="count"></div>
+      </div>
+      <div class="carGrid" id="cards"></div>
+    </div>
+  </section>
+
+  <section class="section why">
+    <div class="wrap">
+      <div class="sectionHead">
+        <div>
+          <div class="mini">Neden Metrikon?</div>
+          <h2>Lüks görünümün arkasında<br>satış mantığı var.</h2>
+        </div>
+        <p>Sitenin güzel durması tek başına yeterli değil. Buradaki her blok; güven oluşturmak, aracı daha değerli göstermek ve ziyaretçiyi mesaj atmaya ikna etmek için tasarlandı.</p>
+      </div>
+      <div class="benefits">
+        <article class="benefit"><small>Brand First</small><b>Marka görünürlüğü ilk ekranda maksimum.</b><p>Kullanıcı siteye girer girmez markayı ve kalite algısını hisseder. Bu, aracın algılanan değerini yükseltir.</p></article>
+        <article class="benefit"><small>Showroom Feel</small><b>Instagram’daki güçlü görsel dil web’e taşınır.</b><p>Farklı açılar ve güçlü fotoğraflar yalnızca galeri değil, satış psikolojisi oluşturur.</p></article>
+        <article class="benefit"><small>Direct Conversion</small><b>Her blok bir görüşme almaya çalışır.</b><p>Butonlar, araç detayları ve araç talep formu ziyaretçiyi doğrudan WhatsApp veya aramaya yönlendirir.</p></article>
+        <article class="benefit"><small>Luxury Positioning</small><b>Sıradan ilan sitesi değil, premium vitrindir.</b><p>Bu sayede Metrikon daha kurumsal, daha güven veren ve daha üst segment görünür.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section gallery" id="gallery">
+    <div class="wrap">
+      <div class="sectionHead">
+        <div>
+          <div class="mini">Görsel Galeri</div>
+          <h2>Farklı açılar.<br>Tek kalite standardı.</h2>
+        </div>
+        <p>Instagram’da dikkat çeken görsel yaklaşımı web tarafında da koruyan bir galeri yapısı. Kullanıcı her karede premium algıyı daha da güçlendirir.</p>
+      </div>
+      <div class="galleryGrid"><figure class="galleryItem wide tall"><img src="https://www.gelgezgor.com/uploads/images/2025/06/10/img-20250610-wa0084-6847FE7EE0766-530_393.jpg" alt="Showroom"><figcaption>Showroom</figcaption></figure>
+<figure class="galleryItem "><img src="https://www.gelgezgor.com/uploads/images/2026/07/14/731022418182724097332959995695762370211413443n-6A555A0484418-530_393.jpg" alt="Porsche Cayenne"><figcaption>Porsche Cayenne</figcaption></figure>
+<figure class="galleryItem "><img src="https://www.gelgezgor.com/uploads/images/2026/07/14/734253256182728982232959993372849775245325631n-6A555B8394BD2-530_393.jpg" alt="Mercedes GLE 300d"><figcaption>Mercedes GLE 300d</figcaption></figure>
+<figure class="galleryItem wide"><img src="https://www.gelgezgor.com/uploads/images/2026/07/30/750229534182744731902959993740634086666563111n-6A6BB4A2E8982-530_393.jpg" alt="BMW X5"><figcaption>BMW X5</figcaption></figure>
+<figure class="galleryItem "><img src="https://www.gelgezgor.com/uploads/images/2026/07/14/73276999518272508736295999399912710701120441n-6A555ACC8DFE5-530_393.jpg" alt="Mercedes GLC 220d"><figcaption>Mercedes GLC 220d</figcaption></figure>
+<figure class="galleryItem tall"><img src="https://domcar.com.cy/upload/resize_cache/iblock/b15/640_399_2/b1511ca4f1dfe92409df957653b68da3.jpg" alt="Jeep Gladiator"><figcaption>Jeep Gladiator</figcaption></figure>
+<figure class="galleryItem "><img src="https://www.gelgezgor.com/uploads/images/2026/07/30/75955871118275836930295999899874952870962713n-6A6BB653DEFEA-530_393.jpg" alt="Audi Q7"><figcaption>Audi Q7</figcaption></figure>
+<figure class="galleryItem 
