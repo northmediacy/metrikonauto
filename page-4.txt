@@ -1,0 +1,67 @@
+ "><img src="https://www.gelgezgor.com/uploads/images/2026/05/20/671227979182668377582959994628240962031312218n-6A0DB42C98311-530_393.jpg" alt="SYM"><figcaption>SYM</figcaption></figure></div>
+    </div>
+  </section>
+
+  <section class="section leads" id="contact">
+    <div class="wrap leadGrid">
+      <div class="leadInfo">
+        <div class="mini">İletişim & Satış</div>
+        <h2>Doğru araç için<br>şimdi görüşelim.</h2>
+        <p>Metrikon Automotive olarak sizi uzun bekleme, dağınık bilgi ve yorucu süreçlerle uğraştırmak istemiyoruz. Hızlı bilgi, araç uygunluğu ve yönlendirme için bize doğrudan ulaşın.</p>
+        <div class="leadRows">
+          <div class="leadRow"><span>Telefon</span><b>+90 533 853 97 90</b></div>
+          <div class="leadRow"><span>WhatsApp</span><b>Hızlı bilgi & anlık iletişim</b></div>
+          <div class="leadRow"><span>Konum</span><b>Girne / Kuzey Kıbrıs</b></div>
+          <div class="leadRow"><span>Portföy</span><b>Otomobil · SUV · Pick-up · Motosiklet</b></div>
+        </div>
+        <div class="leadStack">
+          <div>Beğendiğiniz aracı bize iletin, hızlı dönüş sağlayalım.</div>
+          <div>Portföyde olmayan bir model arıyorsanız araç bulma talebi bırakın.</div>
+          <div>WhatsApp üzerinden daha pratik ve hızlı ilerleyin.</div>
+        </div>
+        <div class="heroActions" style="margin-top:24px;margin-bottom:0">
+          <a class="btn btnPrimary" href="https://wa.me/905338539790" target="_blank">WhatsApp’tan Yaz</a>
+          <a class="btn btnGhost" href="tel:+905338539790">Hemen Ara</a>
+        </div>
+      </div>
+      <div class="leadForm" id="leadForm">
+        <div class="mini">Araç Talebi</div>
+        <h3>Aradığınız araç portföyde yoksa bırakın, biz sizi arayalım.</h3>
+        <p>Bu alan satış odaklı dönüşüm noktasıdır. Kullanıcı yalnızca mevcut aracı incelemez; istediği araç için talep bırakabilir.</p>
+        <div class="formGrid">
+          <div class="field"><label>Ad Soyad</label><input id="fName" type="text" placeholder="Adınız Soyadınız"></div>
+          <div class="field"><label>Telefon</label><input id="fPhone" type="text" placeholder="Telefon numaranız"></div>
+          <div class="field"><label>Marka / Model</label><input id="fCar" type="text" placeholder="Örn. BMW X5"></div>
+          <div class="field"><label>Kategori</label><select id="fCat"><option>SUV</option><option>Sedan</option><option>Pick-up</option><option>Hatchback</option><option>Motosiklet</option><option>Fark Etmez</option></select></div>
+          <div class="field"><label>Durum</label><select id="fStatus"><option>0 KM</option><option>2. El</option><option>Fark Etmez</option></select></div>
+          <div class="field"><label>Bütçe</label><input id="fBudget" type="text" placeholder="Örn. £20.000 - £25.000"></div>
+          <div class="field full"><label>Ek Not</label><textarea id="fNote" placeholder="Renk, yıl, motor, donanım veya özellikle aradığınız detayları yazın"></textarea></div>
+        </div>
+        <div class="formActions">
+          <button class="btn btnPrimary" type="button" onclick="sendLead()">Talebi WhatsApp’tan Gönder</button>
+          <a class="btn btnGhost" href="tel:+905338539790">Telefonla Ulaş</a>
+        </div>
+        <div class="tiny">Portföy hızlı değişebilir. En net ve en hızlı bilgi için WhatsApp üzerinden anında iletişim önerilir.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="contactBand">
+    <div class="wrap inner">
+      <div>
+        <h3>Metrikon Automotive<br>güçlü görünür, hızlı döner.</h3>
+        <p>Kaliteli araç seçkisi, lüks vitrin sunumu ve doğrudan dönüşüm alanlarıyla bu deneyim Metrikon’u sıradan ilan düzeninden çıkarıp gerçek bir premium showroom seviyesine taşır.</p>
+      </div>
+      <div class="ctaGroup">
+        <a class="btn btnDark" style="background:rgba(17,17,17,.12);border-color:rgba(17,17,17,.12);color:#111" href="#portfolio">Portföyü İncele</a>
+        <a class="btn btnDark" style="background:#111;color:#fff;border-color:#111" href="https://wa.me/905338539790" target="_blank">Hemen Mesaj Gönder</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="footerGrid">
+      <div>
+        <svg class="brandMark" viewBox="0 0 760 180" aria-label="Metrikon Automotive"><defs><linearGradient id="g1" x1="0" x2="1"><stop stop-color="#f8f2e7"/><stop offset="1" stop-color="#c7a66a"/></linearGradient></defs><path d="M35 56 C145 14, 295 10, 410 14 C520 18, 640 30, 725 58 C650 50, 585 49, 525 50 C485 20, 440 12, 370 10 C275 10, 205 25, 145 56 C112 56,78 56,35 56Z" fill="url(#g1)" opacity=".95"/><text x="58" y="118" font-size="78" font-weight="900" font-family="Arial, sans-serif" letter-spacing="11" fill="url(#g1)">METRIKON</text><text x="102" y="154" font-size="27" font-weight="700" fon
