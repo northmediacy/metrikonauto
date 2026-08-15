@@ -1,0 +1,95 @@
+name: Build direct static site
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/build-static-site.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Build one-file static site
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re, base64
+
+          html = ''.join(Path(f'page-{i}.txt').read_text(encoding='utf-8') for i in range(1,6))
+          css = Path('style.css').read_text(encoding='utf-8')
+          js = Path('app.js').read_text(encoding='utf-8')
+
+          def data_b64(name):
+              return 'data:image/jpeg;base64,' + Path('assets', name).read_text(encoding='utf-8').strip()
+
+          imgs = {
+              'showroom': data_b64('showroom.b64'),
+              'cayenne': data_b64('cayenne.b64'),
+              'gle300d': data_b64('gle300d.b64'),
+              'x5': data_b64('x5.b64'),
+              'audiq7': data_b64('audiq7.b64'),
+              'glc220d': data_b64('glc220d.b64'),
+              'sym': data_b64('sym.b64'),
+              'x1': data_b64('x1.b64'),
+              'cherokee': data_b64('cherokee.b64'),
+              'tiguan': data_b64('tiguan.b64'),
+              'mghs': data_b64('mghs.b64'),
+          }
+          jeep = Path('assets/c062920570b84e.jpg')
+          imgs['jeepg'] = 'data:image/jpeg;base64,' + base64.b64encode(jeep.read_bytes()).decode() if jeep.exists() else data_b64('jeepg.b64')
+
+          alt_map = {
+              'Showroom':'showroom', 'Porsche Cayenne':'cayenne', 'Mercedes GLE 300d':'gle300d',
+              'BMW X5':'x5', 'Jeep Gladiator':'jeepg', 'Audi Q7':'audiq7',
+              'Mercedes GLC 220d':'glc220d', 'SYM':'sym', 'SYM Scooter':'sym',
+              'BMW X1':'x1', 'Jeep Cherokee':'cherokee', 'Volkswagen Tiguan':'tiguan',
+              'MG HS Exclusive':'mghs'
+          }
+          for alt,key in alt_map.items():
+              pattern = re.compile(r'<img\s+src="[^"]*"\s+alt="'+re.escape(alt)+r'"')
+              html = pattern.sub('<img src="'+imgs[key]+'" alt="'+alt+'"', html)
+
+          # Hero background
+          css = re.sub(r"url\((['\"]?)https://www\.gelgezgor\.com/uploads/images/[^)'\"\s]+\1\)", 'url("'+imgs['showroom']+'")', css)
+
+          # Dynamic vehicle data
+          id_map = {k:k for k in ['cayenne','gle300d','glc220d','x5','x1','audiq7','jeepg','cherokee','tiguan','mghs','sym']}
+          for car_id,key in id_map.items():
+              pattern = re.compile(r'("id"\s*:\s*"'+re.escape(car_id)+r'"[\s\S]*?"img"\s*:\s*")[^"]*(")')
+              js = pattern.sub(lambda m: m.group(1)+imgs[key]+m.group(2), js, count=1)
+
+          # Strip any remaining hotlinks so browser never depends on them.
+          html = re.sub(r'https://www\.gelgezgor\.com/uploads/images/[^"\'\s)]+', imgs['showroom'], html)
+          css = re.sub(r'https://www\.gelgezgor\.com/uploads/images/[^"\'\s)]+', imgs['showroom'], css)
+          js = re.sub(r'https://www\.gelgezgor\.com/uploads/images/[^"\'\s)]+', imgs['showroom'], js)
+          html = re.sub(r'https://domcar\.com\.cy/[^"\'\s)]+', imgs['jeepg'], html)
+          js = re.sub(r'https://domcar\.com\.cy/[^"\'\s)]+', imgs['jeepg'], js)
+
+          html = html.replace('<link rel="stylesheet" href="style.css">', '<style>'+css+'</style>')
+          html = html.replace('<script src="app.js"></script>', '<script>'+js.replace('</script>','<\\/script>')+'</script>')
+          html = html.replace('✦','📞')
+          Path('index.html').write_text(html, encoding='utf-8')
+          print('index.html bytes:', Path('index.html').stat().st_size)
+          PY
+      - name: Commit static index
+        run: |
+          git config user.name "northmedia-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add index.html
+          if git diff --cached --quiet; then
+            echo "No changes"
+          else
+            git commit -m "Publish one-file static Metrikon site"
+            git push origin main
+          fi
