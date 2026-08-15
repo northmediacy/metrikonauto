@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+	<!--[if lt IE 7 ]><html class="ie ie6" lang="ru"> <![endif]-->
+	<!--[if IE 7 ]><html class="ie ie7" lang="ru"> <![endif]-->
+	<!--[if IE 8 ]><html class="ie ie8" lang="ru"> <![endif]-->
+	<!--[if (gte IE 9)|!(IE)]><!-->
+	<html lang="ru">
+	<!--<![endif]-->
+
+<head>
+	<title>Карта сайта</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+	<meta property="og:type" content="website" />
+	<meta property="og:url" content="https://domcar.com.cy/sitemap/" />
+	<meta property="og:title" content="Карта сайта" />
+	<meta property="og:image" content="https://domcar.com.cy/bitrix/templates/main/img/logo_main.png" />
+	<meta property="og:description" content="Карта сайта Dom Real Estate" />
+	<meta property="og:keywords" content="" />
+	<meta http-equiv="imagetoolbar" content="no" />
+	<meta name="geo.placename" content="Лимасол, Кипр" />
+	<meta name="geo.position" content="34.687526;33.042165" />
+	<meta name="geo.region" content="RU-Лимасол" />
+	<meta name="ICBM" content="34.687526, 33.042165" />
+	<meta name="format-detection" content="telephone=no" />
+																											<!--[if lt IE 9]>
+														<![endif]-->
+
+	
+	
+								
+	
+	
+	
+																					
+										
+		
+		
+					
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="robots" content="noyaca" />
+<meta name="description" content="Карта сайта Dom Real Estate" />
+<link href="/bitrix/js/main/core/css/core.min.css?15967374882854" type="text/css" rel="stylesheet" />
+
+<script data-skip-moving="true">(function(w, d) {var v = w.frameCacheVars = {'CACHE_MODE':'HTMLCACHE','storageBlocks':[],'dynamicBlocks':{'LkGdQn':'27abdf1862c2','jmonnO':'892de68e2a53','iIjGFB':'d38c36ae091b'},'AUTO_UPDATE':true,'AUTO_UPDATE_TTL':'120'};var inv = false;if (v.AUTO_UPDATE === false){if (v.AUTO_UPDATE_TTL && v.AUTO_UPDATE_TTL > 0){var lm = Date.parse(d.lastModified);if (!isNaN(lm)){var td = new Date().getTime();if ((lm + v.AUTO_UPDATE_TTL * 1000) >= td){w.frameRequestStart = false;w.preventAutoUpdate = true;return;}inv = true;}}else{w.frameRequestStart = false;w.preventAutoUpdate = true;return;}}var r = w.XMLHttpRequest ? new XMLHttpRequest() : (w.ActiveXObject ? new w.ActiveXObject("Microsoft.XMLHTTP") : null);if (!r) { return; }w.frameRequestStart = true;var m = v.CACHE_MODE; var l = w.location; var x = new Date().getTime();var q = "?bxrand=" + x + (l.search.length > 0 ? "&" + l.search.substring(1) : "");var u = l.protocol + "//" + l.host + l.pathname + q;r.open("GET", u, true);r.setRequestHeader("BX-ACTION-TYPE", "get_dynamic");r.setRequestHeader("BX-CACHE-MODE", m);r.setRequestHeader("BX-CACHE-BLOCKS", v.dynamicBlocks ? JSON.stringify(v.dynamicBlocks) : "");if (inv){r.setRequestHeader("BX-INVALIDATE-CACHE", "Y");}try { r.setRequestHeader("BX-REF", d.referrer || "");} catch(e) {}if (m === "APPCACHE"){r.setRequestHeader("BX-APPCACHE-PARAMS", JSON.stringify(v.PARAMS));r.setRequestHeader("BX-APPCACHE-URL", v.PAGE_URL ? v.PAGE_URL : "");}r.onreadystatechange = function() {if (r.readyState != 4) { return; }var a = r.getResponseHeader("BX-RAND");var b = w.BX && w.BX.frameCache ? w.BX.frameCache : false;if (a != x || !((r.status >= 200 && r.status < 300) || r.status === 304 || r.status === 1223 || r.status === 0)){var f = {error:true, reason:a!=x?"bad_rand":"bad_status", url:u, xhr:r, status:r.status};if (w.BX && w.BX.ready){BX.ready(function() {setTimeout(function(){BX.onCustomEvent("onFrameDataRequestFail", [f]);}, 0);});}else{w.frameRequestFail = f;}return;}if (b){b.onFrameDataReceived(r.responseText);if (!w.frameUpdateInvoked){b.update(false);}w.frameUpdateInvoked = true;}else{w.frameDataString = r.responseText;}};r.send();})(window, document);</script>
+<script data-skip-moving="true">(function(w, d, n) {var cl = "bx-core";var ht = d.documentElement;var htc = ht ? ht.className : undefined;if (htc === undefined || htc.indexOf(cl) !== -1){return;}var ua = n.userAgent;if (/(iPad;)|(iPhone;)/i.test(ua)){cl += " bx-ios";}else if (/Android/i.test(ua)){cl += " bx-android";}cl += (/(ipad|iphone|android|mobile|touch)/i.test(ua) ? " bx-touch" : " bx-no-touch");cl += w.devicePixelRatio && w.devicePixelRatio >= 2? " bx-retina": " bx-no-retina";var ieVersion = -1;if (/AppleWebKit/.test(ua)){cl += " bx-chrome";}else if ((ieVersion = getIeVersion()) > 0){cl += " bx-ie bx-ie" + ieVersion;if (ieVersion > 7 && ieVersion < 10 && !isDoctype()){cl += " bx-quirks";}}else if (/Opera/.test(ua)){cl += " bx-opera";}else if (/Gecko/.test(ua)){cl += " bx-firefox";}if (/Macintosh/i.test(ua)){cl += " bx-mac";}ht.className = htc ? htc + " " + cl : cl;function isDoctype(){if (d.compatMode){return d.compatMode == "CSS1Compat";}return d.documentElement && d.documentElement.clientHeight;}function getIeVersion(){if (/Opera/i.test(ua) || /Webkit/i.test(ua) || /Firefox/i.test(ua) || /Chrome/i.test(ua)){return -1;}var rv = -1;if (!!(w.MSStream) && !(w.ActiveXObject) && ("ActiveXObject" in w)){rv = 11;}else if (!!d.documentMode && d.documentMode >= 10){rv = 10;}else if (!!d.documentMode && d.documentMode >= 9){rv = 9;}else if (d.attachEvent && !/Opera/.test(ua)){rv = 8;}if (rv == -1 || rv == 8){var re;if (n.appName == "Microsoft Internet Explorer"){re = new RegExp("MSIE ([0-9]+[\.0-9]*)");if (re.exec(ua) != null){rv = parseFloat(RegExp.$1);}}else if (n.appName == "Netscape"){rv = 11;re = new RegExp("Trident/.*rv:([0-9]+[\.0-9]*)");if (re.exec(ua) != null){rv = parseFloat(RegExp.$1);}}}return rv;}})(window, document, navigator);</script>
+
+
+<link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" type="text/css"  rel="stylesheet" />
+<link href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" type="text/css"  rel="stylesheet" />
+
+
+<link href="/bitrix/cache/css/s1/main/template_d71692ed98117f0683f01c94457ae518/template_d71692ed98117f0683f01c94457ae518_v1.css?1745397777538743" type="text/css"  data-template-style="true" rel="stylesheet" />
+
+
+
+
+
+
+
+							<link rel="preload" as="style" href="/bitrix/templates/main/libs/font-awesome/css/font-awesome.css" />
+	<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+	<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
+	<link rel="alternate" hreflang="en" href="https://domcar.com.cy/en/sitemap/">	<meta name="theme-color" content="#ffffff" />
+	<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+	<link rel="manifest" href="/site.webmanifest">
+	<link rel="canonical" href="https://domcar.com.cy/sitemap/" />
+	<meta name="yandex-verification" content="05a24ac387ab4e5b" />
+	<meta name="google-site-verification" content="s60okyi3sYrH1rkdZjj1-xXhOCt9ybVT1hfjcRBLArA" />
+	<meta name="facebook-domain-verification" content="q148yvc25e5r5yntmdgfzhryrkrm16" />
+	<!-- Google Tag Manager -->
+		<!-- End Google Tag Manager -->
+
+<!-- Google tag (gtag.js) -->
+	<script data-skip-moving="true">
+		function initCounters() {
+		  /* Facebook pixel */
+			!function(f,b,e,v,n,t,s)
+			{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+			n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+			if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+			n.queue=[];t=b.createElement(e);t.async=!0;
+			t.src=v;s=b.getElementsByTagName(e)[0];
+			s.parentNode.insertBefore(t,s)}(window, document,'script',
+			'https://connect.facebook.net/en_US/fbevents.js');
+			fbq('init', '688230906301412');
+			fbq('track', 'PageView');
+		  /* End Facebook pixel */
+		}
+
+		const TouchSupport = 'ontouchstart' in window || navigator.msMaxTouchPoints;
+		var fired = false;
+		if(TouchSupport){
+			window.addEventListener('touchstart',()=>{if(fired===false){fired=true;setTimeout(()=>{initCounters();},0)}});
+		} else {
+			window.addEventListener('scroll',()=>{if(fired===false){fired=true;setTimeout(()=>{initCounters();},0)}});
+		}
+		window.addEventListener('mousemove',()=>{if(fired===false){fired=true;setTimeout(()=>{initCounters();},0)}});
+	</script>
+
+
+		<!-- SCRIPTS CALLGEAR START-->
+	<script data-skip-moving="true" async src="https://app.callgear.com/static/cs.min.js?k=K1noqsrWUh5qxgGvfWzZQkEbWdlKKnql"></script>
+<script data-skip-moving="true" async src="https://custom.callgear.com/static/66380/script.js"></script>	<!-- SCRIPTS CALLGEAR END -->
+</head>
+<body>
+
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5G5LHDW"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+
+
+	<!-- Facebook Pixel Code -->
+	<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=688230906301412&ev=PageView&noscript=1" /></noscript>
+	<!-- End Facebook Pixel Code -->
+	<noscript><img id="vk-rtrg" src="https://vk.com/rtrg?p=VK-RTRG-257276-2aBQS"  alt="" /></noscript>
+		<header>
+		<div class="top-nav">
+			<div class="top-nav-wrap">
+				<div class="container">
+					
+				<div class="menu-burger"><i class="fa fa-bars"></i></div>
+				
+					<div class="top-enter-btn">
+																			
+<div class="change-lang-block">
+						<div class="lang-item active" >RU</div>
+								<a href="/en/sitemap/" class="lang-item">EN</a>
+			</div>											</div>
+					
+					
+<div class="social-h">
+	<nav class="social-links">
+								<a id="bx_3218110189_34096" onclick="ym(46219338,'reachGoal','messanger'); gtag('event', 'click', {'event_category': 'messenger'}); return true;" rel="nofollow" target="_blank" href="https://www.facebook.com/DOMCarCyprus" class="facebook" title="facebook">
+							</a>
+								<a id="bx_3218110189_34097" onclick="ym(46219338,'reachGoal','messanger'); gtag('event', 'click', {'event_category': 'messenger'}); return true;" rel="nofollow" target="_blank" href="https://www.instagram.com/domcarcy/" class="instagram" title="instagram">
+							</a>
+								<a id="bx_3218110189_58343" onclick="ym(46219338,'reachGoal','messanger'); gtag('event', 'click', {'event_category': 'messenger'}); return true;" rel="nofollow" target="_blank" href="https://t.me/alisadomcar" class="telegram" title="telegram">
+							</a>
+			</nav>
+</div>					<div class="header-menu-bg"></div>
+					<ul class="top-nav-list">
+											<div id="bxdynamic_LkGdQn_start" style="display:none"></div>		<li>
+		<a class="" href="/info/">О нас</a>
+					<ul class="nav-list-lvl2">
+			</li>
+		<li>
+		<a class="add-prop mobile" href="/info/about/">О компании</a>
+			</li>
+		<li>
+		<a class="add-prop mobile" href="/info/team/">Наша команда</a>
+			</li>
+		<li>
+		<a class="add-prop mobile" href="/info/vacancy/">Вакансии</a>
+			</li>
+		<li>
+		<a class="add-prop mobile" href="/info/contacts/">Контакты</a>
+			</li>
+			</ul>
+		<li>
+		<a class="" href="/live/">Новости</a>
+			</li>
+		<li>
+		<a class="" href="/favorite/" rel="nofollow">Избранное</a>
+			</li>
+<div id="bxdynamic_LkGdQn_end" style="display:none"></div>							<li><a class="add-prop mobile" href="/addobjects/" data-description="">+ Добавить объект</a></li>
+						
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="header-bar">
+			<div class="container">
+				<div class="row row-header">
+					<div class="col-lg-3 col-md-3 col-sm-3 cl-x-3 col-xs-6">
+						<a href="/" class="site-settings-logo">
+							<img src="/bitrix/templates/main/img/logo_main.png" class="img-logo" alt="Дом на Кипре" />
+						</a>
+					</div>
+					<div class="col-lg-4 col-md-4 col-sm-4 cl-x-4 col-xs-6">
+						<div class="header-input-wrap">
+							<div class="header-jimp">
+								<form method="post" id="JIMP" enctype="multipart/form-data" action="/catalog/jump.php">
+									<div class="get-obj-container">
+										<input type="text" name="ID" class="js-object-search styler" size="7" placeholder="Поиск" value="" />
+										<input name="LANG" type="hidden" value="ru" />
+										<a href="#" rel="nofollow" onclick="document.getElementById('JIMP').submit(); return false;" class="pseudo get-item">Показать</a>
+									</div>
+									<div class="block-search-result"></div>
+								</form>
+							</div>
+						</div>
+					</div>
+					<div class="mobile-block-reverse">
+					<div class="col-lg-2 col-md-2 col-sm-2 cl-x-2 col-xs-12">
+						<div class="soc-header">
+								<div class="soc-we-is-online">
+									<div class="soc-online-jaw">Пишите нам, мы онлайн</div>
+								</div>
+								<div class="soc-header_socials">
+																			<div class="soc-header_is-social">
+											<a href="https://t.me/NataliaDOMcar"
+												target="_blank" class="social-telegram" title="telegram" onclick="Comagic.omni.forwardTelegram('https://t.me/NataliaDOMcar')"  rel="nofollow"></a>
+										</div>
+																			<div class="soc-header_is-social">
+											<a href="https://wa.me/35796166777"
+												target="_blank" class="social-whatsapp" title="whatsapp" onclick="Comagic.omni.forwardWhatsApp('https://wa.me/35796166777')"  rel="nofollow"></a>
+										</div>
+																	</div>
+						</div>
+					</div>
+					<div class="col-lg-3 col-md-3 col-sm-3 cl-x-3 col-xs-12 work-time-mobile">
+						<div class="work-time">
+							<div class="header-phone"><a href="tel:+35725281653" rel="nofollow" onclick="fbq('track', 'InitiateCheckout'); ym(91207179,'reachGoal','phone'); gtag('event', 'click', {'event_category': 'phone'}); return true;">
+								+357 25 281 653							</a></div>
+							<div class="w-time">
+								<a class="header-email" href="mailto:info@domcar.cy" rel="nofollow" onclick="fbq('track', 'InitiateCheckout'); ym(91207179,'reachGoal','email'); gtag('event', 'click', {'event_category': 'mail'}); return true;" target="_blank">
+									<i class="fa fa-envelope"></i>
+									info@domcar.cy								</a>
+							</div>
+						</div>
+					</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</header>
+	<div class="close-header-container"><a class="close-header">Скрыть</a></div>
+					<div class="ttle bg-grey-section">
+			<div class="container">
+				<div class="row">
+					<h1 itemprop="name">Карта сайта</h1>
+				</div>
+											</div>
+		</div>
+			<div class="breadcrumb-main">
+		<div class="container">
+			<div class="row">
+			  <link href="/bitrix/css/main/font-awesome.css?160147050628777" type="text/css" rel="stylesheet" />
+<ul class="bx-breadcrumb" itemscope itemtype="http://schema.org/BreadcrumbList">
+			<li class="bx-breadcrumb-item bx-breadcrumb-item-angle fa fa-angle-right" id="bx_breadcrumb_0" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+				<a class="bx-breadcrumb-item-link" href="/" title="Главная" itemprop="item"><meta itemprop="position" content="0" /><meta itemprop="name" content="Главная" /><i class="fas fa-home icon_bread_main"></i>
+				</a>
+			</li>
+		
+			<li class="bx-breadcrumb-item bx-breadcrumb-item-angle fa fa-angle-right" id="bx_breadcrumb_1" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+				<a class="bx-breadcrumb-item-link" href="/sitemap/" title="Карта сайта" itemprop="item"><span class="bx-breadcrumb-item-text"  itemprop="name">Карта сайта</span><meta itemprop="position" content="1" />
+				</a>
+			</li>
+		
+			<li class="bx-breadcrumb-item" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+				<span class="bx-breadcrumb-item-text" itemprop="name">Карта сайта</span>
+				<meta itemprop="position" content="2" />
+			</li>
+		</ul>			</div>
+		</div>
+	</div>
+
+								<div id="bxdynamic_jmonnO_start" style="display:none"></div><!-- Вывод в футер если тегов больше 10 -->
+<!-- END Вывод в футер если тегов больше 10 END --><div id="bxdynamic_jmonnO_end" style="display:none"></div>	
+					<div class="container">
+			<div class="row">
+	
+
+
+		<div class="site_map_container">
+									
+					<ul>																					<li class="li-head"><a href="/info/about/">О портале</a></li>
+													
+									
+							
+																										<li class="li-head"><a href="/info/contacts/">Контакты</a></li>
+													
+									
+							
+																																		<li class="li-head"><a href="/live/">DOM LiVE</a></li>
+																												<li class="left-shift"><a href="/live/digest/">Дайджест</a></li>
+																																																<li class="left-shift"><a href="/live/blog/">О Кипре</a></li>
+																																																<li class="left-shift"><a href="/live/documents/">Документы</a></li>
+																																																<li class="left-shift"><a href="/live/questions/">Вопросы профессионалу</a></li>
+																																																<li class="left-shift"><a href="/live/lifehacks/">Лайфхаки</a></li>
+																																										
+									
+							
+																										<li class="li-head"><a href="/favorite/">Избранное</a></li>
+													
+									
+							
+																										<li class="li-head"><a href="/evaluation/">Оценка</a></li>
+													
+									
+							
+																										<li class="li-head"><a href="/investment/">Интересные предложения</a></li>
+													
+									
+							
+																																		<li class="li-head"><a href="/cyprus/">Теги</a></li>
+																												<li class="left-shift"><a href="/list/hybrid/">Гибрид</a></li>
+																																																<li class="left-shift"><a href="/list/collectible/">Коллекционный</a></li>
+																																																<li class="left-shift"><a href="/list/new/">Новый</a></li>
+																																																<li class="left-shift"><a href="/list/exclusive/">Эксклюзивный</a></li>
+																																																<li class="left-shift"><a href="/list/elektro/">Электро</a></li>
+																																										
+									
+							
+																										<li class="li-head"><a href="/addobjects/">Мои объекты</a></li>
+													
+									
+					</div>
+		</div>
+	</div>
+<footer>
+	<div class="container">
+		<div class="footer-top">
+			<div class="footer-top__item">
+				<p>
+					<a href="/" class="site-settings-logo">
+						<img src="/bitrix/templates/main/img/logo_main.png" width="147" height="72" class="img-logo" alt="Дом на Кипре" />
+					</a>
+				</p>
+				<p>Продажа автомобилей на Кипре<br>DOMCar Auto Sales</p>
+				<div>
+					<span class="footer_red-label">Телефон: <span><a href="tel:+357 25 281 653" onclick="ym(91207179,'reachGoal','phone'); return true;">+357 25 281 653</a>
+				</div>
+				<div>
+					<span class="footer_red-label">Email: </span><a class="footer-email" href="mailto:info@domcar.cy" onclick="ym(91207179,'reachGoal','email'); return true;" target="_blank">info@domcar.cy</a>
+				</div>		
+			</div>
+		</div>
+	</div>
+</footer>
+	<div class="remodal modal-login" data-remodal-id="modal" data-remodal-options="hashTracking: false">
+		<div data-remodal-action="close" class="modal-login__close"></div>
+		<div id="bxdynamic_iIjGFB_start" style="display:none"></div>
+<div class="form-auth-wrapper  form-auth-wrapper-js  active" FORM_TYPE="AUTH">
+	<div class="form-auth-wrapper__title">Вход в личный кабинет</div>
+	<div class="form-auth-wrapper__content">
+		<div class="error"></div>
+		<form class="form-auth  form-auth-js" method="GET" action="/sitemap/?login=yes">
+			<input type="hidden" name="lang" value="ru">
+			<input type="hidden" name="FORM_TYPE" value="AUTH" />
+			<div class="form-auth__field">
+				<div class="form-auth__row">
+					<input class="input-style" type="text" name="USER_LOGIN" placeholder="E-mail">
+				</div>
+				<div class="form-auth__row">
+					<input class="input-style" type="password" name="USER_PASSWORD" placeholder="Пароль">
+				</div>
+			</div>
+			<div class="form-auth__btn">
+				<button class="btn btn-auth-main form-submit-js">Авторизоваться</button>
+			</div>
+		</form>
+	</div>
+	<div class="form-auth-wrapper__social">
+		<div class="form-auth-wrapper__social-title">
+			<div class="form-text">ИЛИ ВОЙДИТЕ ЧЕРЕЗ СОЦ СЕТИ</div>
+		</div>
+				<div class="form-auth-social">
+	<ul class="form-auth-social__list">
+		<li class="form-auth-social__item">
+			<a id="bx_socserv_icon_Facebook" placeholder="" class="form-auth-social__link" href="javascript:void(0)" onclick="BX.util.popup('https://www.facebook.com/dialog/oauth?client_id=2642465766037930&amp;redirect_uri=https%3A%2F%2Fdomcar.com.cy%2Fbitrix%2Ftools%2Foauth%2Ffacebook.php&amp;scope=email,user_friends&amp;display=popup&amp;state=site_id%3Ds1%26backurl%3D%252Fsitemap%252F%253Fcheck_key%253D99d6a32465c59db24d759196f64942f2%26redirect_url%3D%252Fsitemap%252F', 680, 600)" title="Facebook">
+				<i class="facebook"></i>
+			</a>
+			</li>
+		<li class="form-auth-social__item">
+			<a id="bx_socserv_icon_GoogleOAuth" placeholder="" class="form-auth-social__link" href="javascript:void(0)" onclick="BX.util.popup('https://accounts.google.com/o/oauth2/auth?client_id=570900154383-kdr5c5rjrsrvdj0iuom3d91bjh6s3s48.apps.googleusercontent.com&amp;redirect_uri=https%3A%2F%2Fdomcar.com.cy%2Fbitrix%2Ftools%2Foauth%2Fgoogle.php&amp;scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile&amp;response_type=code&amp;access_type=offline&amp;state=provider%3DGoogleOAuth%26site_id%3Ds1%26backurl%3D%252Fsitemap%252F%253Fcheck_key%253D99d6a32465c59db24d759196f64942f2%26mode%3Dopener%26redirect_url%3D%252Fsitemap%252F', 580, 400)" title="Google">
+				<i class="google"></i>
+			</a>
+			</li>
+		<li class="form-auth-social__item">
+			<a id="bx_socserv_icon_VKontakte" placeholder="" class="form-auth-social__link" href="javascript:void(0)" onclick="BX.util.popup('https://oauth.vk.com/authorize?client_id=7346731&amp;redirect_uri=https%3A%2F%2Fdomcar.com.cy%2Fbitrix%2Ftools%2Foauth%2Fvkontakte.php&amp;scope=friends,offline,email&amp;response_type=code&amp;state=site_id%3Ds1%26backurl%3D%252Fsitemap%252F%253Fcheck_key%253D99d6a32465c59db24d759196f64942f2%26redirect_url%3D%252Fsitemap%252F', 660, 425)" title="ВКонтакте">
+				<i class="vkontakte"></i>
+			</a>
+			</li>
+	</ul>
+</div>
+			</div>
+	<div class="form-auth-wrapper__alternate">
+		Нет учетной записи DOM LIVE? - 		<a class="uppercase-link  form-toggler-js">Зарегистрируйтесь</a>
+	</div>
+</div>
+
+<div class="form-auth-wrapper  form-auth-wrapper-js" FORM_TYPE="REGISTER">
+	<div class="form-auth-wrapper__title">Вход и регистрация</div>
+	<div class="form-auth-wrapper__content">
+		<div class="error"></div>
+		<form class="form-auth  form-auth-js" method="GET" action="/sitemap/?login=yes">
+			<input type="hidden" name="lang" value="ru">
+			<input type="hidden" name="FORM_TYPE" value="REGISTER" />
+			<div class="form-auth__field">
+				<div class="form-auth__row">
+					<input class="input-style" type="text" name="USER_LOGIN" placeholder="E-mail">
+				</div>
+				<div class="form-auth__row">
+					<input class="input-style" type="password" name="USER_PASSWORD" placeholder="Пароль">
+				</div>
+			</div>
+			<div class="form-auth__field">
+				<div class="form-auth__policy">
+					<label class="policy-checkbox" err-text="Подтвердите согласие">
+						<input class="policy-checkbox__input" type="checkbox" name="POLICY" value="Y">
+						<div class="policy-checkbox__checkbox"></div>
+					</label>
+					<div class="form-auth__policy-text">
+						Я соглашаюсь с правилами обработки персональных данных и политикой конфиденциальности <a href="/policy.php" target="_blank">DOM.COM.CY</a>					</div>
+				</div>
+			</div>
+			<div class="form-auth__btn">
+				<button class="btn btn-auth-main form-submit-js">Зарегистрироваться</button>
+			</div>
+		</form>
+	</div>
+	<div class="form-auth-wrapper__social">
+		<div class="form-auth-wrapper__social-title">
+			<div class="form-text">ИЛИ ВОЙДИТЕ ЧЕРЕЗ СОЦ СЕТИ</div>
+		</div>
+				<div class="form-auth-social">
+	<ul class="form-auth-social__list">
+		<li class="form-auth-social__item">
+			<a id="bx_socserv_icon_Facebook" placeholder="" class="form-auth-social__link" href="javascript:void(0)" onclick="BX.util.popup('https://www.facebook.com/dialog/oauth?client_id=2642465766037930&amp;redirect_uri=https%3A%2F%2Fdomcar.com.cy%2Fbitrix%2Ftools%2Foauth%2Ffacebook.php&amp;scope=email,user_friends&amp;display=popup&amp;state=site_id%3Ds1%26backurl%3D%252Fsitemap%252F%253Fcheck_key%253D99d6a32465c59db24d759196f64942f2%26redirect_url%3D%252Fsitemap%252F', 680, 600)" title="Facebook">
+				<i class="facebook"></i>
+			</a>
+			</li>
+		<li class="form-auth-social__item">
+			<a id="bx_socserv_icon_GoogleOAuth" placeholder="" class="form-auth-social__link" href="javascript:void(0)" onclick="BX.util.popup('https://accounts.google.com/o/oauth2/auth?client_id=570900154383-kdr5c5rjrsrvdj0iuom3d91bjh6s3s48.apps.googleusercontent.com&amp;redirect_uri=https%3A%2F%2Fdomcar.com.cy%2Fbitrix%2Ftools%2Foauth%2Fgoogle.php&amp;scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile&amp;response_type=code&amp;access_type=offline&amp;state=provider%3DGoogleOAuth%26site_id%3Ds1%26backurl%3D%252Fsitemap%252F%253Fcheck_key%253D99d6a32465c59db24d759196f64942f2%26mode%3Dopener%26redirect_url%3D%252Fsitemap%252F', 580, 400)" title="Google">
+				<i class="google"></i>
+			</a>
+			</li>
+		<li class="form-auth-social__item">
+			<a id="bx_socserv_icon_VKontakte" placeholder="" class="form-auth-social__link" href="javascript:void(0)" onclick="BX.util.popup('https://oauth.vk.com/authorize?client_id=7346731&amp;redirect_uri=https%3A%2F%2Fdomcar.com.cy%2Fbitrix%2Ftools%2Foauth%2Fvkontakte.php&amp;scope=friends,offline,email&amp;response_type=code&amp;state=site_id%3Ds1%26backurl%3D%252Fsitemap%252F%253Fcheck_key%253D99d6a32465c59db24d759196f64942f2%26redirect_url%3D%252Fsitemap%252F', 660, 425)" title="ВКонтакте">
+				<i class="vkontakte"></i>
+			</a>
+			</li>
+	</ul>
+</div>
+			</div>
+	<div class="form-auth-wrapper__alternate">
+		Уже есть учетная запись на DOM LIVE? - 		<a class="uppercase-link  form-toggler-js">Войдите</a>
+	</div>
+</div><div id="bxdynamic_iIjGFB_end" style="display:none"></div>	</div>
+	<div class="remodal modal-favorite" data-remodal-id="modal-favorite" data-remodal-options="hashTracking: false">
+		<div data-remodal-action="close" class="modal-login__close"></div>
+		<div class="form-favorite-wrapper">
+			<div class="container">
+	<div class="row">
+		<div class="form-favorite">
+			
+		<span>Чтобы отметить избранное, необходимо <a href="#" data-remodal-target="modal">зарегистрироваться или авторизоваться</a>. При регистрации вы получаете следующие преимущества:</span>
+		<ul>
+			<li>просмотр видео и всех фото с главной страницы,</li>
+			<li>возможность добавления в избранное,</li>
+			<li>доступ к приватным объектам.</li>
+		</ul>
+			</div>
+	</div>
+</div>		</div>
+	</div>
+
+	
+
+<a href="#0" class="cd-top"></a>
+
+		<div itemscope itemtype="http://schema.org/Organization" style="display: none;">
+			<img itemprop="image" src="/bitrix/templates/main/img/logo_main.png"/>
+			<span itemprop="name">Компания «DOMCar Auto Sales»</span>
+			Контакты:
+			<div itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
+				Адрес:
+				<span itemprop="streetAddress">Demetri Psatha 24</span>
+				<span itemprop="postalCode">4102</span>
+				<span itemprop="addressLocality">Limassol, Cyprus</span>,
+			</div>
+			Телефон:<span itemprop="telephone">+357 25 281 653</span>,
+			Электронная почта: <span itemprop="email">info@domcar.cy</span>
+		</div>
+				
+		<!-- Google tag (gtag.js) -->
+   	<!-- Start cookieyes banner --> 
+		<!-- End cookieyes banner -->
+	<script src="/bitrix/templates/main/libs/html5shiv/es5-shim.min.js"></script>
+<script src="/bitrix/templates/main/libs/html5shiv/html5shiv.min.js"></script>
+<script src="/bitrix/templates/main/libs/html5shiv/html5shiv-printshiv.min.js"></script>
+<script src="/bitrix/templates/main/libs/respond/respond.min.js"></script>
+<script>if(!window.BX)window.BX={};if(!window.BX.message)window.BX.message=function(mess){if(typeof mess=='object') for(var i in mess) BX.message[i]=mess[i]; return true;};</script>
+<script>(window.BX||top.BX).message({'JS_CORE_LOADING':'Загрузка...','JS_CORE_NO_DATA':'- Нет данных -','JS_CORE_WINDOW_CLOSE':'Закрыть','JS_CORE_WINDOW_EXPAND':'Развернуть','JS_CORE_WINDOW_NARROW':'Свернуть в окно','JS_CORE_WINDOW_SAVE':'Сохранить','JS_CORE_WINDOW_CANCEL':'Отменить','JS_CORE_WINDOW_CONTINUE':'Продолжить','JS_CORE_H':'ч','JS_CORE_M':'м','JS_CORE_S':'с','JSADM_AI_HIDE_EXTRA':'Скрыть лишние','JSADM_AI_ALL_NOTIF':'Показать все','JSADM_AUTH_REQ':'Требуется авторизация!','JS_CORE_WINDOW_AUTH':'Войти','JS_CORE_IMAGE_FULL':'Полный размер'});</script><script src="/bitrix/js/main/core/core.min.js?1596737488249634"></script><script>BX.setJSList(['/bitrix/js/main/core/core_ajax.js','/bitrix/js/main/core/core_promise.js','/bitrix/js/main/polyfill/promise/js/promise.js','/bitrix/js/main/loadext/loadext.js','/bitrix/js/main/loadext/extension.js','/bitrix/js/main/polyfill/promise/js/promise.js','/bitrix/js/main/polyfill/find/js/find.js','/bitrix/js/main/polyfill/includes/js/includes.js','/bitrix/js/main/polyfill/matches/js/matches.js','/bitrix/js/ui/polyfill/closest/js/closest.js','/bitrix/js/main/polyfill/fill/main.polyfill.fill.js','/bitrix/js/main/polyfill/find/js/find.js','/bitrix/js/main/polyfill/matches/js/matches.js','/bitrix/js/main/polyfill/core/dist/polyfill.bundle.js','/bitrix/js/main/core/core.js','/bitrix/js/main/polyfill/intersectionobserver/js/intersectionobserver.js','/bitrix/js/main/lazyload/dist/lazyload.bundle.js','/bitrix/js/main/polyfill/core/dist/polyfill.bundle.js','/bitrix/js/main/parambag/dist/parambag.bundle.js']);
+BX.setCSSList(['/bitrix/js/main/core/css/core.css','/bitrix/js/main/lazyload/dist/lazyload.bundle.css','/bitrix/js/main/parambag/dist/parambag.bundle.css']);</script>
+<script>(window.BX||top.BX).message({'Избранное':'Избранное','Инвестиционные проекты Кипра':'Инвестиционные проекты Кипра','Импорт':'Импорт','Войти':'Войти','Выход':'Выход','Регистрация':'Регистрация','Личный кабинет':'Личный кабинет','Добавить недвижимость':'Добавить объект','Продажа':'Продажа','Заявка на подбор':'Заявка на подбор','Спасибо, ваша заявка принята':'Спасибо, ваша заявка принята, мы свяжемся с вами в ближайшее время','Имя':'Имя','Телефон':'Телефон','Ваши пожелания':'Ваши пожелания','Нажимая кнопку «Отправить»':'Нажимая кнопку «Отправить», я даю свое согласие на обработку моих персональных данных','Опишите ваши пожелания при подборе недвижимости':'Опишите ваши пожелания при подборе недвижимости','Отправить':'Отправить','/':'/','Знаете № объекта?':'Поиск','Показать':'Показать','Скрыть':'Скрыть','Оставить заявку':'Оставить заявку','Не нашли подходящий объект?':'Не нашли подходящий объект?','Наши менеджеры помогут с выбором':'Наши менеджеры помогут с выбором','DEF_TEMPLATE_PA':'Личный кабинет','DEF_TEMPLATE_AUTH':'Вход и регистрация','DEF_TEMPLATE_AUTH_MOB':'Войти','DEF_TEMPLATE_PA_MOB':'ЛК','Пишите нам, мы онлайн':'Пишите нам, мы онлайн'});</script>
+<script>(window.BX||top.BX).message({'LANGUAGE_ID':'ru','FORMAT_DATE':'DD.MM.YYYY','FORMAT_DATETIME':'DD.MM.YYYY HH:MI:SS','COOKIE_PREFIX':'domcar','SERVER_TZ_OFFSET':'10800','SITE_ID':'s1','SITE_DIR':'/'});</script><script  src="/bitrix/cache/js/s1/main/kernel_main/kernel_main_v1.js?1701768096181613"></script>
+
+
+<script  src="/bitrix/cache/js/s1/main/kernel_main_polyfill_customevent/kernel_main_polyfill_customevent_v1.js?17081226711051"></script>
+<script src="/bitrix/js/ui/dexie/dist/dexie.bitrix.bundle.min.js?159673749060291"></script>
+<script src="/bitrix/js/main/core/core_ls.min.js?15967374887365"></script>
+<script src="/bitrix/js/main/core/core_frame_cache.min.js?159673748810422"></script>
+<script src="/bitrix/js/main/popup/dist/main.popup.bundle.min.js?159673748958041"></script>
+<script>BX.setJSList(['/bitrix/js/main/core/core_fx.js','/bitrix/js/main/core/core_dd.js','/bitrix/js/main/session.js','/bitrix/js/main/pageobject/pageobject.js','/bitrix/js/main/core/core_window.js','/bitrix/js/main/date/main.date.js','/bitrix/js/main/core/core_date.js','/bitrix/js/main/utils.js','/bitrix/js/main/polyfill/customevent/main.polyfill.customevent.js','/bitrix/templates/main/libs/jquery/jquery-1.11.2.min.js','/bitrix/templates/main/js/fullscreen-api-polyfill.js','/bitrix/templates/main/js/jquery.datetimepicker.min.js','/bitrix/templates/main/js/moment.min.js','/bitrix/templates/main/js/daterangepicker.js','/bitrix/templates/main/js/jquery.magnific-popup.js','/bitrix/templates/main/js/jquery-ui.js','/bitrix/templates/main/js/jquery.ui.touch-punch.js','/bitrix/templates/main/libs/colorbox/jquery.colorbox.js','/bitrix/templates/main/libs/chosen/chosen.jquery.js','/bitrix/templates/main/js/lazysizes.min.js','/bitrix/templates/main/js/lightbox.js','/bitrix/templates/main/js/jquery.touchSwipe.min.js','/bitrix/templates/main/js/jquery.maskedinput.js','/bitrix/templates/main/js/mask.js','/bitrix/templates/main/script.js','/bitrix/templates/main/js/swiper.old.min.js','/bitrix/templates/main/js/select2.min.js','/bitrix/templates/main/js/jquery.fancybox.min.js','/bitrix/templates/live/js/remodal.min.js','/bitrix/templates/.default/components/bitrix/system.auth.form/auth2/script.js']); </script>
+<script>BX.setCSSList(['/bitrix/templates/main/css/bootstrap.css','/bitrix/templates/main/css/main.popup.bundle.min.css','/bitrix/templates/main/css/font.css','/bitrix/templates/main/css/reset.css','/bitrix/templates/main/css/main.css','/bitrix/templates/main/css/media.css','/bitrix/templates/.default/css/video-icon.css','/bitrix/templates/.default/css/additional-text.css','/bitrix/templates/main/libs/colorbox/colorbox.css','/bitrix/templates/main/libs/formstyler/jquery.formstyler.css','/bitrix/templates/main/libs/chosen/chosen.css','/bitrix/templates/main/libs/sweetalert/sweet-alert.css','/bitrix/templates/main/css/swiper.css','/bitrix/templates/main/css/lightbox.css','/bitrix/templates/main/css/chosen.min.css','/bitrix/templates/main/css/jquery.datetimepicker.min.css','/bitrix/templates/main/css/daterangepicker.css','/bitrix/templates/main/css/magnific-popup.css','/bitrix/templates/main/css/jquery-ui.css','/bitrix/templates/main/css/favorite-message.css','/bitrix/templates/live/css/remodal.css','/bitrix/templates/live/css/remodal-default-theme.css','/bitrix/templates/.default/css/favorite-icon.css','/bitrix/templates/main/css/video-js.css','/bitrix/templates/main/css/select2.min.css','/bitrix/templates/main/components/bitrix/system.pagenavigation/.default/style.css','/bitrix/templates/main/components/bitrix/breadcrumb/.default/style.css','/bitrix/templates/main/components/bitrix/news.list/list_tags/style.css','/bitrix/templates/.default/components/bitrix/system.auth.form/auth2/style.css','/bitrix/templates/.default/components/bitrix/socserv.auth.form/social_new/style.css','/bitrix/templates/main/styles.css','/bitrix/templates/main/template_styles.css']); </script>
+
+
+<script  src="/bitrix/cache/js/s1/main/template_9350dbb30b096506b60acb7b99dc1a6a/template_9350dbb30b096506b60acb7b99dc1a6a_v1.js?17017671841187848"></script>
+<script>var _ba = _ba || []; _ba.push(["aid", "1a1db2eeaf75ff51226aec7797ce81fe"]); _ba.push(["host", "domcar.com.cy"]); (function() {var ba = document.createElement("script"); ba.type = "text/javascript"; ba.async = true;ba.src = (document.location.protocol == "https:" ? "https://" : "http://") + "bitrix.info/ba.js";var s = document.getElementsByTagName("script")[0];s.parentNode.insertBefore(ba, s);})();</script>
+
+
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-5G5LHDW');</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-11100945185"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'AW-11100945185');
+</script>
+
+<script type="text/javascript">
+function BxSocServPopup(id)
+{
+	var content = BX("bx_socserv_form_"+id);
+	if(content)
+	{
+		var popup = BX.PopupWindowManager.create("socServPopup"+id, BX("bx_socserv_icon_"+id), {
+			autoHide: true,
+			closeByEsc: true,
+			angle: {offset: 24},
+			content: content,
+			offsetTop: 3
+		});
+
+		popup.show();
+
+		var input = BX.findChild(content, {'tag':'input', 'attribute':{'type':'text'}}, true);
+		if(input)
+		{
+			input.focus();
+		}
+
+		var button = BX.findChild(content, {'tag':'input', 'attribute':{'type':'submit'}}, true);
+		if(button)
+		{
+			button.className = 'btn btn-primary';
+		}
+	}
+}
+</script>
+
+<script type="text/javascript">
+function BxSocServPopup(id)
+{
+	var content = BX("bx_socserv_form_"+id);
+	if(content)
+	{
+		var popup = BX.PopupWindowManager.create("socServPopup"+id, BX("bx_socserv_icon_"+id), {
+			autoHide: true,
+			closeByEsc: true,
+			angle: {offset: 24},
+			content: content,
+			offsetTop: 3
+		});
+
+		popup.show();
+
+		var input = BX.findChild(content, {'tag':'input', 'attribute':{'type':'text'}}, true);
+		if(input)
+		{
+			input.focus();
+		}
+
+		var button = BX.findChild(content, {'tag':'input', 'attribute':{'type':'submit'}}, true);
+		if(button)
+		{
+			button.className = 'btn btn-primary';
+		}
+	}
+}
+</script>
+
+<script>
+			var isAuthtorized = 0;
+			var authFavorite = [];
+		</script>
+<script src="/bitrix/templates/main/js/favorite.js"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-2VNQWC45YW"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-2VNQWC45YW');
+</script>
+<script id="cookieyes" src="https://cdn-cookieyes.com/client_data/ea52252ae2c9171dc7d61a31/script.js"></script>
+</body>
+</html>
+<!--3f9fe10b6d7133ed88d3115709791f22-->

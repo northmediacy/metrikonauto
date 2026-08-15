@@ -59,6 +59,6 @@ p>Portföy sürekli değişebilir. Bugün gördüğünüz aracı yarın bulamaya
 <figure class="galleryItem "><img src="https://www.gelgezgor.com/uploads/images/2026/07/14/734253256182728982232959993372849775245325631n-6A555B8394BD2-530_393.jpg" alt="Mercedes GLE 300d"><figcaption>Mercedes GLE 300d</figcaption></figure>
 <figure class="galleryItem wide"><img src="https://www.gelgezgor.com/uploads/images/2026/07/30/750229534182744731902959993740634086666563111n-6A6BB4A2E8982-530_393.jpg" alt="BMW X5"><figcaption>BMW X5</figcaption></figure>
 <figure class="galleryItem "><img src="https://www.gelgezgor.com/uploads/images/2026/07/14/73276999518272508736295999399912710701120441n-6A555ACC8DFE5-530_393.jpg" alt="Mercedes GLC 220d"><figcaption>Mercedes GLC 220d</figcaption></figure>
-<figure class="galleryItem tall"><img src="https://domcar.com.cy/upload/resize_cache/iblock/b15/640_399_2/b1511ca4f1dfe92409df957653b68da3.jpg" alt="Jeep Gladiator"><figcaption>Jeep Gladiator</figcaption></figure>
+<figure class="galleryItem tall"><img src="assets/c062920570b84e.jpg" alt="Jeep Gladiator"><figcaption>Jeep Gladiator</figcaption></figure>
 <figure class="galleryItem "><img src="https://www.gelgezgor.com/uploads/images/2026/07/30/75955871118275836930295999899874952870962713n-6A6BB653DEFEA-530_393.jpg" alt="Audi Q7"><figcaption>Audi Q7</figcaption></figure>
 <figure class="galleryItem 
