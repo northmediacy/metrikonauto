@@ -14,19 +14,27 @@ jobs:
         shell: python
         run: |
           from pathlib import Path
+          import re
           p=Path('index.html')
           s=p.read_text(encoding='utf-8')
-          s=s.replace('.md p{color:var(--muted);line-height:1.7}', '.md p{color:var(--muted);line-height:1.7}.detailGrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:18px 0}.detailGrid div{padding:12px 13px;border:1px solid var(--line);border-radius:14px;background:rgba(255,255,255,.025)}.detailGrid span{display:block;color:var(--muted);font-size:11px;margin-bottom:4px}.detailGrid b{display:block;color:var(--text);font-size:14px}.detailNote{padding:13px 14px;border-radius:14px;background:rgba(201,167,106,.08);border:1px solid rgba(201,167,106,.22);color:#ead7b2;font-size:13px;line-height:1.6;margin-top:12px}')
-          old='<div class="modal" id="modal"><div class="modalCard"><img id="mi" src="" alt=""><div class="md"><button class="close" onclick="closeM()">×</button><div class="kicker">Araç Detayı</div><h3 id="mt"></h3><p id="mp"></p><a class="btn" href="#iletisim" onclick="closeM()">Bilgi Talebi</a></div></div></div>'
-          new='<div class="modal" id="modal"><div class="modalCard"><img id="mi" src="" alt=""><div class="md"><button class="close" onclick="closeM()">×</button><div class="kicker">Araç Detayı</div><h3 id="mt"></h3><p id="mp"></p><div class="detailGrid"><div><span>Marka</span><b id="dbrand"></b></div><div><span>Model Yılı</span><b id="dyear"></b></div><div><span>Kategori</span><b id="dcat"></b></div><div><span>Durum</span><b id="dstatus"></b></div><div><span>Yakıt</span><b id="dfuel"></b></div><div><span>Şanzıman</span><b id="dtrans"></b></div><div><span>Kilometre</span><b id="dkm"></b></div><div><span>Seçki</span><b id="dbadge"></b></div></div><div class="detailNote">Bu demo alanında yalnızca doğrulanmış temel araç bilgileri gösterilir. Güncel fiyat, stok durumu ve ek donanım bilgileri Metrikon Automotive tarafından yönetilebilir.</div><button class="btn" type="button" onclick="closeM()">Detayları Gör</button></div></div></div>'
-          if old not in s:
-              raise SystemExit('Modal pattern not found')
-          s=s.replace(old,new)
-          oldjs="function openM(id){let x=cars.find(v=>v.id===id);mi.src=x.img;mt.textContent=`${x.title} • ${x.year}`;mp.textContent=`${x.status} • ${x.fuel} • ${x.trans}. Güncel uygunluk ve detaylar için Metrikon Automotive ile iletişime geçebilirsiniz.`;modal.classList.add('open')}"
-          newjs="function openM(id){let x=cars.find(v=>v.id===id);mi.src=x.img;mt.textContent=`${x.title} • ${x.year}`;mp.textContent=`${x.brand} ${x.title}, ${x.year} model. Temel araç bilgileri aşağıda yer alıyor.`;dbrand.textContent=x.brand;dyear.textContent=x.year;dcat.textContent=x.cat;dstatus.textContent=x.status;dfuel.textContent=x.fuel;dtrans.textContent=x.trans;dkm.textContent=x.km;dbadge.textContent=x.badge;modal.classList.add('open')}"
-          if oldjs not in s:
-              raise SystemExit('JS pattern not found')
-          s=s.replace(oldjs,newjs)
+
+          # Detail styles, once.
+          if '.detailGrid{' not in s:
+              s=s.replace('</style>', '.detailGrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:18px 0}.detailGrid div{padding:12px 13px;border:1px solid var(--line);border-radius:14px;background:rgba(255,255,255,.025)}.detailGrid span{display:block;color:var(--muted);font-size:11px;margin-bottom:4px}.detailGrid b{display:block;color:var(--text);font-size:14px}.detailNote{padding:13px 14px;border-radius:14px;background:rgba(201,167,106,.08);border:1px solid rgba(201,167,106,.22);color:#ead7b2;font-size:13px;line-height:1.6;margin:12px 0 14px}@media(max-width:720px){.detailGrid{grid-template-columns:1fr 1fr}}</style>',1)
+
+          detail_html='<div class="detailGrid"><div><span>Marka</span><b id="dbrand"></b></div><div><span>Model Yılı</span><b id="dyear"></b></div><div><span>Kategori</span><b id="dcat"></b></div><div><span>Durum</span><b id="dstatus"></b></div><div><span>Yakıt</span><b id="dfuel"></b></div><div><span>Şanzıman</span><b id="dtrans"></b></div><div><span>Kilometre</span><b id="dkm"></b></div><div><span>Seçki</span><b id="dbadge"></b></div></div><div class="detailNote">Güncel fiyat, stok durumu ve ek donanım bilgileri Metrikon Automotive tarafından yönetilebilir.</div>'
+          if 'id="dbrand"' not in s:
+              s=s.replace('<p id="mp"></p>', '<p id="mp"></p>'+detail_html,1)
+
+          # Any CTA inside the vehicle modal that jumps to contact becomes a non-navigating detail button.
+          s=re.sub(r'<a class="btn" href="#iletisim"[^>]*>.*?</a>', '<button class="btn" type="button">Detayları Gör</button>', s, count=1)
+
+          # Enrich the existing openM function without depending on exact wording.
+          pat=r"function openM\(id\)\{.*?modal\.classList\.add\('open'\)\}"
+          repl="function openM(id){let x=cars.find(v=>v.id===id);if(!x)return;mi.src=x.img;mt.textContent=`${x.title} • ${x.year}`;mp.textContent=`${x.brand} ${x.title}, ${x.year} model. Temel araç bilgileri aşağıda yer alıyor.`;dbrand.textContent=x.brand;dyear.textContent=x.year;dcat.textContent=x.cat;dstatus.textContent=x.status;dfuel.textContent=x.fuel;dtrans.textContent=x.trans;dkm.textContent=x.km;dbadge.textContent=x.badge;modal.classList.add('open')}"
+          s,n=re.subn(pat,repl,s,count=1,flags=re.S)
+          if n!=1:
+              raise SystemExit('openM pattern not found')
           p.write_text(s,encoding='utf-8')
       - name: Commit changes
         run: |
