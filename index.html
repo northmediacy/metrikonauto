@@ -1,22 +1,68 @@
 <!doctype html><html lang="tr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Metrikon Automotive</title><meta name="theme-color" content="#090b0e"></head><body style="margin:0;background:#090b0e;color:#fff;font-family:Arial,sans-serif"><div id="loading" style="min-height:100vh;display:grid;place-items:center;text-align:center;padding:30px"><div><div style="font-size:22px;font-weight:800;letter-spacing:.08em">METRIKON AUTOMOTIVE</div><div style="margin-top:12px;color:#b8b1a5">Premium showroom yükleniyor…</div></div></div><script>
-const proxyImage=u=>{if(!/^https?:\/\//i.test(u))return u;return 'https://images.weserv.nl/?url='+encodeURIComponent(u)+'&output=jpg&q=88'};
-const proxify=s=>s
-.replace(/https:\/\/www\.gelgezgor\.com\/uploads\/images\/[^\"'\s)]+/g,proxyImage)
-.replace(/https:\/\/domcar\.com\.cy\/upload\/resize_cache\/iblock\/[^\"'\s)]+/g,proxyImage);
+const textFile=p=>fetch(p,{cache:'no-store'}).then(r=>{if(!r.ok)throw new Error(p+' '+r.status);return r.text()});
+const dataUrl=b64=>'data:image/jpeg;base64,'+b64.trim();
+const escRe=s=>s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
+function patchStaticImage(html,alt,src){
+  const re=new RegExp('src="[^"]*"\\s+alt="'+escRe(alt)+'"','g');
+  return html.replace(re,()=>`src="${src}" alt="${alt}"`);
+}
+function patchCarImage(js,id,src){
+  const re=new RegExp('("id"\\s*:\\s*"'+escRe(id)+'"[\\s\\S]*?"img"\\s*:\\s*")[^"]*(")');
+  return js.replace(re,(m,a,b)=>a+src+b);
+}
 Promise.all([
- ...['page-1.txt','page-2.txt','page-3.txt','page-4.txt','page-5.txt'].map(x=>fetch(x,{cache:'no-store'}).then(r=>{if(!r.ok)throw new Error(x);return r.text()})),
- fetch('style.css',{cache:'no-store'}).then(r=>{if(!r.ok)throw new Error('style.css');return r.text()}),
- fetch('app.js',{cache:'no-store'}).then(r=>{if(!r.ok)throw new Error('app.js');return r.text()})
+ ...['page-1.txt','page-2.txt','page-3.txt','page-4.txt','page-5.txt'].map(textFile),
+ textFile('style.css'), textFile('app.js'),
+ textFile('assets/showroom.b64'), textFile('assets/cayenne.b64'), textFile('assets/gle300d.b64'),
+ textFile('assets/x5.b64'), textFile('assets/audiq7.b64'), textFile('assets/glc220d.b64'), textFile('assets/sym.b64'),
+ textFile('assets/x1.b64'), textFile('assets/cherokee.b64'), textFile('assets/tiguan.b64'), textFile('assets/mghs.b64')
 ]).then(all=>{
- let html=proxify(all.slice(0,5).join(''));
- const css=proxify(all[5]);
- const js=proxify(all[6]).replace(/<\/script>/gi,'<\\/script>');
- html=html.replace('<link rel="stylesheet" href="style.css">','<style>'+css+'</style>');
- html=html.replace('<script src="app.js"></script>','<script>'+js+'<\/script>');
- html=html.replace(/<img /g,'<img referrerpolicy="no-referrer" loading="eager" ');
- document.open();document.write(html);document.close();
+  let html=all.slice(0,5).join('');
+  let css=all[5];
+  let js=all[6];
+  const img={
+    showroom:dataUrl(all[7]), cayenne:dataUrl(all[8]), gle300d:dataUrl(all[9]), x5:dataUrl(all[10]),
+    audiq7:dataUrl(all[11]), glc220d:dataUrl(all[12]), sym:dataUrl(all[13]), x1:dataUrl(all[14]),
+    cherokee:dataUrl(all[15]), tiguan:dataUrl(all[16]), mghs:dataUrl(all[17]), jeepg:'assets/c062920570b84e.jpg'
+  };
+
+  // Statik vitrindeki bütün araç fotoğraflarını daha HTML tarayıcıya verilmeden yerel görsellere çevir.
+  const alts={
+    'Showroom':img.showroom,
+    'Porsche Cayenne':img.cayenne,
+    'Mercedes GLE 300d':img.gle300d,
+    'BMW X5':img.x5,
+    'Jeep Gladiator':img.jeepg,
+    'Audi Q7':img.audiq7,
+    'Mercedes GLC 220d':img.glc220d,
+    'SYM':img.sym,
+    'SYM Scooter':img.sym,
+    'BMW X1':img.x1,
+    'Jeep Cherokee':img.cherokee,
+    'Volkswagen Tiguan':img.tiguan,
+    'MG HS Exclusive':img.mghs
+  };
+  for(const [alt,src] of Object.entries(alts)) html=patchStaticImage(html,alt,src);
+
+  // Hero arka planı da repo içindeki gömülü fotoğrafa bağlanır.
+  css=css.replace(/url\((['"]?)https:\/\/www\.gelgezgor\.com\/uploads\/images\/[^)'"\s]+\1\)/g,()=>`url("${img.showroom}")`);
+
+  // Dinamik portföy kartlarının görsellerini yerel kaynaklara çevir.
+  const cars={cayenne:img.cayenne,gle300d:img.gle300d,glc220d:img.glc220d,x5:img.x5,x1:img.x1,audiq7:img.audiq7,jeepg:img.jeepg,cherokee:img.cherokee,tiguan:img.tiguan,mghs:img.mghs,sym:img.sym};
+  for(const [id,src] of Object.entries(cars)) js=patchCarImage(js,id,src);
+
+  // Her ihtimale karşı geride kalan hotlink adreslerini blokla; tarayıcı dış sunucuya gitmez.
+  html=html.replace(/https:\/\/www\.gelgezgor\.com\/uploads\/images\/[^"'\s)]+/g,()=>img.showroom);
+  css=css.replace(/https:\/\/www\.gelgezgor\.com\/uploads\/images\/[^"'\s)]+/g,()=>img.showroom);
+  js=js.replace(/https:\/\/www\.gelgezgor\.com\/uploads\/images\/[^"'\s)]+/g,()=>img.showroom);
+
+  html=html.replace('<link rel="stylesheet" href="style.css">','<style>'+css+'</style>');
+  js=js.replace(/<\/script>/gi,'<\\/script>');
+  html=html.replace('<script src="app.js"></script>','<script>'+js+'<\/script>');
+  html=html.replace(/<img /g,'<img loading="eager" decoding="async" ');
+  document.open();document.write(html);document.close();
 }).catch(e=>{
- console.error(e);
- document.getElementById('loading').innerHTML='<div><div style="font-size:20px;font-weight:800">Site yüklenemedi.</div><div style="margin-top:10px;color:#b8b1a5">Lütfen sayfayı yenileyin.</div></div>';
+  console.error(e);
+  document.getElementById('loading').innerHTML='<div><div style="font-size:20px;font-weight:800">Site yüklenemedi.</div><div style="margin-top:10px;color:#b8b1a5">Lütfen sayfayı yenileyin.</div></div>';
 });
 </script></body></html>
