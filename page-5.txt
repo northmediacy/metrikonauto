@@ -1,0 +1,55 @@
+t-family="Arial, sans-serif" letter-spacing="16" fill="#efe7d8">AUTOMOTIVE</text></svg>
+        <p class="footerNote">Metrikon Automotive olarak sıfır kilometre ve özenle seçilmiş ikinci el araçları güven, kalite ve güçlü satış odaklı hizmet anlayışıyla sunuyoruz.</p>
+      </div>
+      <div>
+        <div class="footerTitle">Bölümler</div>
+        <div class="footerLinks">
+          <a href="#about">Metrikon</a>
+          <a href="#signature">Öne Çıkanlar</a>
+          <a href="#portfolio">Portföy</a>
+          <a href="#leadForm">Araç Talebi</a>
+        </div>
+      </div>
+      <div>
+        <div class="footerTitle">İletişim</div>
+        <div class="footerLinks">
+          <a href="tel:+905338539790">0533 853 97 90</a>
+          <a href="https://wa.me/905338539790" target="_blank">WhatsApp</a>
+          <span>Girne, KKTC</span>
+        </div>
+      </div>
+    </div>
+    <div class="copy"><span>© 2026 Metrikon Automotive</span><span>Luxury conversion-first digital showroom</span></div>
+  </div>
+</footer>
+
+<div class="floatBar">
+  <a class="fab wa" href="https://wa.me/905338539790" target="_blank" aria-label="WhatsApp">✆</a>
+  <a class="fab call" href="tel:+905338539790" aria-label="Call">📞</a>
+</div>
+<div class="mobileDock">
+  <a class="m1" href="https://wa.me/905338539790" target="_blank">WhatsApp</a>
+  <a class="m2" href="tel:+905338539790">Ara</a>
+</div>
+
+<div class="modal" id="modal" onclick="if(event.target===this)closeModal()">
+  <div class="modalBox">
+    <button class="close" onclick="closeModal()">×</button>
+    <div class="modalImg" id="modalImg"></div>
+    <div class="modalInfo">
+      <div class="mMeta" id="modalMeta"></div>
+      <h3 id="modalTitle"></h3>
+      <div class="mPrice" id="modalPrice"></div>
+      <div class="mDesc">Metrikon Automotive portföyünde yer alan bu araç için hızlı bilgi, uygunluk ve güncel durum detaylarını doğrudan bizimle görüşebilirsiniz.</div>
+      <div class="mSpecs" id="modalSpecs"></div>
+      <div class="mActions">
+        <a class="btn btnPrimary" id="modalWa" target="_blank">WhatsApp’tan Bilgi Al</a>
+        <a class="btn btnGhost" href="tel:+905338539790">Hemen Ara</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
