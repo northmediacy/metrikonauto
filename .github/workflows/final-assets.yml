@@ -25,7 +25,7 @@ jobs:
           dl cx8.jpg 'https://www.carshowroom.com.au/media/21514658/news-19-mazda-cx-8-brings-some-changes-and-1k-ish-price-hike-gallery-01-0319.jpg' 'https://imgcdnblog.carbay.com/wp-content/uploads/2019/11/11152734/2-138.jpg'
           dl glecoupe.jpg 'https://www.formulaimports.com/imagetag/282/5/l/Used-2016-Mercedes-Benz-GLE-450-AMG-AWD-PREM-PKG-PARK-ASST-DRVR-ASST-SUNROOF-1582126267.jpg' 'https://images.cars.ng/images/cars-ng/product_ca589313s_2016_gle450_coupe_for_sale_in_abuja_1768465160800_fl6750_2e1733_6.jpg'
           dl note.jpg 'https://s1.paultan.org/image/2020/11/2021-Nissan-Note-e-Power-12.jpg'
-          dl x5.jpg 'https://www.ssmotors.com.tr/B2ELResim/AracResim2El/18208/acc661e20e2d47cfa2535567fd0083d01406201916373668089_0.jpg'
+          dl x5.jpg 'https://res1.grays.com/handlers/imagehandler.ashx?id=46547555&index=0&s=d&t=sh&ts=639016522970000000' 'https://domcar.com.cy/upload/iblock/954/954164eb811ae99d6f1e7ca510219315.jpg'
           file assets/*
       - name: Commit vehicle photos
         run: |
