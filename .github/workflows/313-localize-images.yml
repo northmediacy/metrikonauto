@@ -1,0 +1,160 @@
+name: Localize 313 Cars images
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/313-localize-images.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  localize:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Install parser
+        run: python -m pip install --quiet requests beautifulsoup4
+      - name: Download real 313 Cars listing images and patch site
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          from bs4 import BeautifulSoup
+          import requests, re, time
+
+          base='https://www.kktcarabam.com'
+          profile=base+'/uye/313-cars'
+          headers={'User-Agent':'Mozilla/5.0'}
+          session=requests.Session(); session.headers.update(headers)
+
+          targets={
+            'golf23':['2023','Volkswagen','Golf'],
+            'navara':['2016','Nissan','Navara'],
+            'xc40':['2022','Volvo','XC40'],
+            'bmw320':['2025','BMW','3 Serisi'],
+            'gti':['2024','Volkswagen','Golf'],
+            'lexusnx':['2023','Lexus','NX'],
+            'x350':['2020','Mercedes','X'],
+            'corolla':['2023','Toyota','Corolla'],
+            'yaris':['2023','Toyota','Yaris'],
+            'ranger':['2023','Ford','Ranger'],
+            'lexusux':['2020','Lexus','UX'],
+            'range':['2022','Land Rover','Range Rover'],
+            'audi':['2020','Audi','TT'],
+            'b180':['2013','Mercedes','B']
+          }
+
+          # Known fresh listing URLs from verified public search, used first.
+          known={
+            'golf23':base+'/159039-volkswagen-golf-gmagusa-benzin-otomatik',
+            'gti':base+'/234751-volkswagen-golf-girne-benzin-otomatik',
+            'yaris':base+'/234746-toyota-yaris-girne-hibrit-otomatik',
+            'x350':base+'/234749-mercedes-benz-x-girne-dizel-otomatik',
+            'bmw320':base+'/235610-bmw-3-serisi-girne-benzin-otomatik'
+          }
+
+          html=session.get(profile,timeout=30).text
+          soup=BeautifulSoup(html,'html.parser')
+          candidates=[]
+          for a in soup.find_all('a',href=True):
+            href=a['href']
+            text=' '.join(a.get_text(' ',strip=True).split())
+            if re.search(r'/\d{5,6}-',href):
+              url=href if href.startswith('http') else base+href
+              candidates.append((url,text))
+          # de-dupe preserving order
+          seen=set(); candidates=[x for x in candidates if not (x[0] in seen or seen.add(x[0]))]
+
+          def page_info(url):
+            try:
+              r=session.get(url,timeout=30); r.raise_for_status()
+              s=BeautifulSoup(r.text,'html.parser')
+              title=(s.find('h1').get_text(' ',strip=True) if s.find('h1') else s.title.get_text(' ',strip=True) if s.title else '')
+              text=' '.join(s.stripped_strings)
+              og=s.find('meta',attrs={'property':'og:image'}) or s.find('meta',attrs={'name':'twitter:image'})
+              img=og.get('content') if og and og.get('content') else None
+              if not img:
+                for im in s.find_all('img',src=True):
+                  src=im['src']
+                  if '/uploads/images/' in src and re.search(r'\.(jpe?g|png|webp)(\?|$)',src,re.I):
+                    img=src; break
+              if img and img.startswith('/'):
+                img=base+img
+              return title,text,img
+            except Exception as e:
+              print('PAGE FAIL',url,e)
+              return '','',None
+
+          # Map candidates to targets using page title/text when necessary.
+          mapping=dict(known)
+          unresolved=[k for k in targets if k not in mapping]
+          for url,anchor in candidates:
+            low=anchor.lower()
+            for key in list(unresolved):
+              toks=[t.lower() for t in targets[key]]
+              if all(t in low for t in toks):
+                mapping[key]=url; unresolved.remove(key)
+          # Second pass checks listing page content for remaining targets.
+          if unresolved:
+            for url,_ in candidates:
+              if not unresolved: break
+              title,text,img=page_info(url)
+              hay=(title+' '+text[:2000]).lower()
+              for key in list(unresolved):
+                toks=[t.lower() for t in targets[key]]
+                if all(t in hay for t in toks):
+                  mapping[key]=url; unresolved.remove(key)
+              time.sleep(.12)
+
+          out=Path('313cars/assets'); out.mkdir(parents=True,exist_ok=True)
+          downloaded={}
+          for key,url in mapping.items():
+            title,text,img=page_info(url)
+            if not img:
+              print('NO IMAGE',key,url); continue
+            try:
+              rr=session.get(img,timeout=30,headers={'Referer':url,'User-Agent':'Mozilla/5.0'}); rr.raise_for_status()
+              ct=rr.headers.get('content-type','')
+              ext='.jpg'
+              if 'png' in ct: ext='.png'
+              elif 'webp' in ct: ext='.webp'
+              p=out/(key+ext); p.write_bytes(rr.content)
+              if p.stat().st_size < 8000:
+                print('TOO SMALL',key,p.stat().st_size); p.unlink(missing_ok=True); continue
+              downloaded[key]='assets/'+p.name
+              print('OK',key,p.stat().st_size,img)
+            except Exception as e:
+              print('IMG FAIL',key,img,e)
+            time.sleep(.1)
+
+          site=Path('313cars/index.html')
+          s=site.read_text(encoding='utf-8')
+          # Patch each car object with a local image path.
+          for key,path in downloaded.items():
+            pat=rf"(\{{id:'{re.escape(key)}'[^\n]*?)(?:,img:[^,}}]+)?(,desc:)"
+            def repl(m):
+              prefix=m.group(1)
+              prefix=re.sub(r",img:[^,}}]+$",'',prefix)
+              return prefix+f",img:'{path}'"+m.group(2)
+            s,n=re.subn(pat,repl,s,count=1)
+            print('PATCH',key,n)
+          # Add a harmless version marker and image count.
+          s=re.sub(r'<title>(.*?)</title>',r'<title>\1</title><!-- 313 images localized -->',s,count=1)
+          site.write_text(s,encoding='utf-8')
+          print('downloaded',len(downloaded),'of',len(targets),'unresolved',unresolved)
+          PY
+      - name: Commit localized images
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add 313cars/index.html 313cars/assets
+          if git diff --cached --quiet; then
+            echo 'No changes to commit'
+          else
+            git commit -m 'Add real 313 Cars vehicle photos'
+            git push
+          fi
