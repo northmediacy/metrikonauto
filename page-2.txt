@@ -1,0 +1,76 @@
+t="Jeep Gladiator"><div class="showLabel"><small>Adventure Line</small><b>Jeep Gladiator</b></div></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="ribbon">
+    <div class="wrap">
+      <div class="ribbonInner">
+        <div class="rCard"><b>0 KM</b><span>Sıfır kilometre seçenekler</span></div>
+        <div class="rCard"><b>2. El</b><span>Özenle seçilmiş stok</span></div>
+        <div class="rCard"><b>VIP</b><span>Randevu ve danışmanlık</span></div>
+        <div class="rCard"><b>Takas</b><span>Değerleme odaklı yaklaşım</span></div>
+        <div class="rCard"><b>Hızlı</b><span>WhatsApp’tan anında iletişim</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section statement" id="about">
+    <div class="wrap">
+      <div class="sectionHead">
+        <div>
+          <div class="mini">Marka Odaklı Deneyim</div>
+          <h2>İlan sitesi değil.<br>Lüks bir satış sahnesi.</h2>
+        </div>
+        <p>Bu yapı sıradan bir araç listeleme sayfası gibi davranmaz. Kullanıcıyı doğrudan markanın içine alır, öne çıkan araçları satacak biçimde vitrine çıkarır ve ziyaretçiyi tek tıkla görüşmeye çevirir. Amaç güzel görünmek değil; iyi görünürken daha çok mesaj ve daha çok satış görüşmesi almaktır.</p>
+      </div>
+      <div class="grid3">
+        <article class="panel large">
+          <div class="num">01 / İlk Etki</div>
+          <h3>Logo önde, güven önde, satış önde.</h3>
+          <p>İlk ekranda filtre değil, marka görünür. Büyük logo, güçlü tipografi, premium araç görselleri ve net çağrılar sayesinde kullanıcı daha ilk saniyede Metrikon Automotive’in seviyesini hisseder.</p>
+          <div class="stack">
+            <div>İlk ekranda büyük logo ve güçlü headline</div>
+            <div>Öne çıkan araçlar satışa hizmet edecek şekilde vitrinlenir</div>
+            <div>WhatsApp ve çağrı butonları her an erişilebilir kalır</div>
+          </div>
+        </article>
+        <article class="panel">
+          <div class="num">02 / Satış Dili</div>
+          <h3>Yumuşak değil, net ve dönüştüren mesajlar.</h3>
+          <p>Metinler Metrikon’un kendi ağzından konuşur. “Bakabilirsiniz” değil, “beklemeyin — iletişime geçin” der. Bu da ziyaretçiyi kararsızlıktan aksiyona taşır.</p>
+        </article>
+        <article class="panel">
+          <div class="num">03 / Aksiyon</div>
+          <h3>Araç beğenen ziyaretçi hemen iletişime geçer.</h3>
+          <p>Her araç kartı, her büyük vitrin ve form alanı doğrudan satış görüşmesine çıkar. Kullanıcıyı kaybettiren ara adımlar azaltılır.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section signature" id="signature">
+    <div class="wrap">
+      <div class="sectionHead">
+        <div>
+          <div class="mini">Öne Çıkan Seçkiler</div>
+          <h2>Markayı taşıyan araçlar.<br>İlk bakışta etki.</h2>
+        </div>
+        <p>Buradaki amaç çok araç göstermek değil; doğru araçları doğru görsellerle sahneye çıkarmak. Ziyaretçi, Metrikon Automotive’in kalite standardını ilk birkaç saniyede anlamalı.</p>
+      </div>
+      <div class="sigGrid">
+        <article class="sig" onclick="openModal('cayenne')"><img src="https://www.gelgezgor.com/uploads/images/2026/07/14/731022418182724097332959995695762370211413443n-6A555A0484418-530_393.jpg" alt="Porsche Cayenne"><div class="sigArrow">↗</div><div class="sigCopy"><small>Signature flagship</small><h3>Porsche Cayenne</h3><div class="price">Özel seçki</div></div></article>
+        <article class="sig" onclick="openModal('gle300d')"><img src="https://www.gelgezgor.com/uploads/images/2026/07/14/734253256182728982232959993372849775245325631n-6A555B8394BD2-530_393.jpg" alt="Mercedes GLE 300d"><div class="sigArrow">↗</div><div class="sigCopy"><small>Luxury SUV</small><h3>Mercedes GLE 300d</h3><div class="price">Öne çıkan araç</div></div></article>
+        <article class="sig" onclick="openModal('x5')"><img src="https://www.gelgezgor.com/uploads/images/2026/07/30/750229534182744731902959993740634086666563111n-6A6BB4A2E8982-530_393.jpg" alt="BMW X5"><div class="sigArrow">↗</div><div class="sigCopy"><small>Premium performance</small><h3>BMW X5</h3><div class="price">Premium SUV</div></div></article>
+        <article class="sig" onclick="openModal('audiq7')"><img src="https://www.gelgezgor.com/uploads/images/2026/07/30/75955871118275836930295999899874952870962713n-6A6BB653DEFEA-530_393.jpg" alt="Audi Q7"><div class="sigArrow">↗</div><div class="sigCopy"><small>Prestige selection</small><h3>Audi Q7</h3><div class="price">Prestij seçki</div></div></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section splitCta">
+    <div class="wrap">
+      <div class="splitBox">
+        <div>
+          <div class="mini">Aksiyon Alanı</div>
+          <h3>Beğendiğiniz aracı kaçırmayın.</h3>
+          <
