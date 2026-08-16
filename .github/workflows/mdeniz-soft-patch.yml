@@ -1,0 +1,67 @@
+name: Patch M Deniz soft premium
+on:
+  push:
+    paths:
+      - '.github/workflows/mdeniz-soft-patch.yml'
+permissions:
+  contents: write
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Apply soft premium styling and repair image paths
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('mdeniz/index.html')
+          text=p.read_text(encoding='utf-8')
+          repls={
+          '.brandmark{width:48px;height:48px;border:1px solid rgba(196,229,237,.32);display:grid;place-items:center;font-weight:900;letter-spacing:-.08em;color:var(--ice2);position:relative}':'.brandmark{width:50px;height:50px;border:1px solid rgba(196,229,237,.28);display:grid;place-items:center;font-weight:900;letter-spacing:-.08em;color:var(--ice2);position:relative;border-radius:18px;background:linear-gradient(180deg,rgba(255,255,255,.035),rgba(255,255,255,.015));box-shadow:0 10px 30px rgba(0,0,0,.18)}',
+          '.brandmark:after{content:"";position:absolute;inset:5px;border:1px solid rgba(140,200,216,.18)}':'.brandmark:after{content:"";position:absolute;inset:6px;border:1px solid rgba(140,200,216,.14);border-radius:12px}',
+          '.headcta{padding:12px 17px;border:1px solid rgba(196,229,237,.25);font-size:12px;font-weight:900;letter-spacing:.05em;background:rgba(7,16,24,.3)}':'.headcta{padding:12px 18px;border:1px solid rgba(196,229,237,.20);font-size:12px;font-weight:900;letter-spacing:.05em;background:rgba(255,255,255,.04);border-radius:16px;box-shadow:0 10px 26px rgba(0,0,0,.12)}',
+          '.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;padding:14px 20px;border:1px solid transparent;background:var(--ice2);color:#071018;font-weight:900;font-size:13px;letter-spacing:.02em}':'.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;padding:15px 22px;border:1px solid transparent;background:var(--ice2);color:#071018;font-weight:900;font-size:13px;letter-spacing:.02em;border-radius:18px;box-shadow:0 12px 28px rgba(0,0,0,.12)}',
+          '.btn.secondary{background:rgba(7,16,24,.36);border-color:rgba(255,255,255,.25);color:#fff}':'.btn.secondary{background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.16);color:#fff}',
+          '.round{width:50px;height:50px;border:1px solid rgba(255,255,255,.24);background:rgba(7,16,24,.48);color:#fff;font-size:20px}':'.round{width:52px;height:52px;border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.06);color:#fff;font-size:20px;border-radius:18px;backdrop-filter:blur(10px)}',
+          '.intro{padding:34px 0;border-bottom:1px solid var(--line);background:#08121a}':'.intro{padding:34px 0 18px;border-bottom:1px solid rgba(255,255,255,.06);background:linear-gradient(180deg,#08121a,#09141d)}',
+          '.introGrid{display:grid;grid-template-columns:1.25fr repeat(3,.75fr);align-items:stretch}':'.introGrid{display:grid;grid-template-columns:1.25fr repeat(3,.75fr);align-items:stretch;gap:14px}',
+          '.introLead{padding:18px 32px 18px 0;border-right:1px solid var(--line);font-size:20px;line-height:1.45;letter-spacing:-.025em}':'.introLead{padding:24px 28px;border:1px solid rgba(255,255,255,.08);border-radius:24px;background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,.015));font-size:20px;line-height:1.45;letter-spacing:-.025em}',
+          '.metric{padding:18px 26px;border-right:1px solid var(--line)}':'.metric{padding:24px 24px;border:1px solid rgba(255,255,255,.08);border-radius:22px;background:linear-gradient(180deg,rgba(255,255,255,.028),rgba(255,255,255,.012))}',
+          '.section{padding:105px 0}':'.section{padding:112px 0}',
+          '.search input{width:100%;background:transparent;border:0;border-bottom:1px solid var(--line);color:#fff;padding:13px 0;outline:none}':'.search input{width:100%;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);color:#fff;padding:15px 18px;outline:none;border-radius:18px}',
+          '.search input:focus{border-color:var(--ice)}':'.search input:focus{border-color:rgba(140,200,216,.55);box-shadow:0 0 0 4px rgba(140,200,216,.10)}',
+          '.filters button{border:1px solid var(--line);background:transparent;color:#aebbc3;padding:10px 14px;font-size:12px;font-weight:800}':'.filters button{border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.03);color:#c3d0d7;padding:11px 16px;font-size:12px;font-weight:800;border-radius:999px}',
+          '.vehicleCard{position:relative;overflow:hidden;background:var(--panel);border:1px solid var(--line);min-height:360px;grid-column:span 4}':'.vehicleCard{position:relative;overflow:hidden;background:var(--panel);border:1px solid rgba(255,255,255,.07);min-height:360px;grid-column:span 4;border-radius:28px;box-shadow:0 18px 44px rgba(0,0,0,.18)}',
+          '.vehicleCard.featured{grid-column:span 8;min-height:620px}':'.vehicleCard.featured{grid-column:span 8;min-height:620px;border-radius:34px}',
+          '.linkbtn{border:0;background:transparent;color:#fff;font-weight:900;font-size:12px;padding:0}':'.linkbtn{border:1px solid rgba(255,255,255,.10);background:rgba(255,255,255,.05);color:#fff;font-weight:900;font-size:12px;padding:11px 14px;border-radius:14px}',
+          '.manifestoShell{display:grid;grid-template-columns:1fr 1fr;min-height:680px;background:var(--ice2);color:#061019}':'.manifestoShell{display:grid;grid-template-columns:1fr 1fr;min-height:680px;background:linear-gradient(135deg,#d4edf2,#c4e5ed);color:#061019;border-radius:34px;overflow:hidden;box-shadow:0 24px 70px rgba(0,0,0,.18)}',
+          '.system{background:var(--bg2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}':'.system{background:linear-gradient(180deg,var(--bg2),#0d1821)}',
+          '.systemGrid{display:grid;grid-template-columns:repeat(3,1fr);border-left:1px solid var(--line);border-top:1px solid var(--line)}':'.systemGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}',
+          '.systemItem{padding:38px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);min-height:260px}':'.systemItem{padding:38px;border:1px solid rgba(255,255,255,.08);min-height:260px;border-radius:28px;background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,.015));box-shadow:0 16px 40px rgba(0,0,0,.12)}',
+          '.formCard{background:rgba(6,14,20,.55);border:1px solid var(--line);padding:28px}':'.formCard{background:rgba(6,14,20,.55);border:1px solid rgba(255,255,255,.08);padding:28px;border-radius:28px;box-shadow:0 18px 44px rgba(0,0,0,.14)}',
+          '.formCard input,.formCard textarea{width:100%;border:1px solid var(--line);background:#071018;color:#fff;padding:13px;outline:none}':'.formCard input,.formCard textarea{width:100%;border:1px solid rgba(255,255,255,.08);background:#071018;color:#fff;padding:15px 16px;outline:none;border-radius:16px}',
+          '.contactMain,.contactSide{border:1px solid var(--line);background:var(--panel);padding:38px}':'.contactMain,.contactSide{border:1px solid rgba(255,255,255,.08);background:var(--panel);padding:38px;border-radius:30px;box-shadow:0 18px 44px rgba(0,0,0,.14)}',
+          '.modal{position:fixed;inset:0;z-index:90;background:rgba(0,0,0,.82);display:none;align-items:center;justify-content:center;padding:20px}':'.modal{position:fixed;inset:0;z-index:90;background:rgba(0,0,0,.74);display:none;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(12px)}',
+          '.modalBox{width:min(1120px,100%);max-height:92vh;overflow:auto;background:#0a151e;border:1px solid var(--line);display:grid;grid-template-columns:1.15fr .85fr;position:relative;box-shadow:var(--shadow)}':'.modalBox{width:min(1120px,100%);max-height:92vh;overflow:auto;background:#0a151e;border:1px solid rgba(255,255,255,.08);display:grid;grid-template-columns:1.15fr .85fr;position:relative;box-shadow:var(--shadow);border-radius:30px}',
+          '.close{position:absolute;right:13px;top:13px;width:44px;height:44px;border:1px solid var(--line);background:rgba(5,11,16,.7);color:#fff;font-size:22px}':'.close{position:absolute;right:16px;top:16px;width:46px;height:46px;border:1px solid rgba(255,255,255,.10);background:rgba(255,255,255,.06);color:#fff;font-size:22px;border-radius:50%}',
+          '.heroRail{margin-top:74px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:22px;align-items:end;border-top:1px solid rgba(255,255,255,.16);padding-top:22px}':'.heroRail{margin-top:74px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:22px;align-items:end;border-top:1px solid rgba(255,255,255,.10);padding-top:22px}',
+          '.mobileBar{display:flex;position:fixed;left:8px;right:8px;bottom:8px;z-index:70;background:rgba(5,12,18,.94);border:1px solid var(--line);padding:7px;gap:7px;backdrop-filter:blur(14px)}':'.mobileBar{display:flex;position:fixed;left:8px;right:8px;bottom:8px;z-index:70;background:rgba(5,12,18,.90);border:1px solid rgba(255,255,255,.10);padding:8px;gap:8px;backdrop-filter:blur(14px);border-radius:20px;box-shadow:0 18px 36px rgba(0,0,0,.18)}',
+          '.mobileBar a{flex:1;text-align:center;padding:12px;font-size:12px;font-weight:900}':'.mobileBar a{flex:1;text-align:center;padding:13px;font-size:12px;font-weight:900;border-radius:14px}'
+          }
+          for old,new in repls.items():
+              text=text.replace(old,new)
+          for name in ['e300','fit','yaris','bmw','egea','dmax']:
+              text=text.replace(f'https://northmediacy.github.io/metrikonauto/mdeniz/assets/{name}.jpg',f'assets/{name}.jpg')
+          p.write_text(text,encoding='utf-8')
+          PY
+      - name: Validate photo references
+        run: |
+          for f in e300 fit yaris bmw egea dmax; do test -s "mdeniz/assets/$f.jpg" || exit 1; done
+          grep -q 'border-radius:34px' mdeniz/index.html
+      - name: Commit
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add mdeniz/index.html
+          git commit -m 'Apply M Deniz soft premium design and image fixes' || exit 0
+          git push
