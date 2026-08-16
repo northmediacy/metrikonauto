@@ -1,0 +1,46 @@
+from pathlib import Path
+import re
+
+p=Path('adventure/index.html')
+s=p.read_text(encoding='utf-8')
+
+css='''
+.tradein{background:#171a18;color:#fff;overflow:hidden}.tradein-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:24px;align-items:stretch}.tradein-copy{padding:54px;border-radius:32px;background:linear-gradient(145deg,#ff5c18,#a73a0d);display:flex;flex-direction:column;justify-content:space-between}.tradein-copy h2{font-size:clamp(52px,6.5vw,92px);line-height:.84;letter-spacing:-.07em;margin:12px 0 24px}.tradein-copy p{color:rgba(255,255,255,.78);line-height:1.8}.tradein-form{padding:42px;border:1px solid rgba(255,255,255,.11);border-radius:32px;background:rgba(255,255,255,.055)}.tradein-form h3{font-size:32px;margin:0 0 8px;letter-spacing:-.04em}.tradein-form>p{color:rgba(255,255,255,.55);line-height:1.7;margin-bottom:22px}.trade-fields{display:grid;grid-template-columns:1fr 1fr;gap:10px}.trade-fields .full{grid-column:1/-1}.tradein-form input,.tradein-form textarea{width:100%;padding:15px 16px;border:1px solid rgba(255,255,255,.12);border-radius:15px;background:rgba(255,255,255,.06);color:#fff;outline:none}.tradein-form input::placeholder,.tradein-form textarea::placeholder{color:rgba(255,255,255,.4)}.tradein-form textarea{min-height:100px;resize:vertical}.trade-note{font-size:11px;color:rgba(255,255,255,.4);margin-top:14px}.detailgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:22px 0}.detailitem{padding:13px 14px;border-radius:14px;background:#ebe6da}.detailitem span{display:block;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:#7c756b;margin-bottom:3px}.detailitem b{font-size:14px}.listing-note{padding:14px 16px;border-left:3px solid var(--orange);background:#f2ede3;color:#6f685f;font-size:12px;line-height:1.65;margin:18px 0}.modalcopy{max-height:80vh;overflow:auto}.trade-chip{display:inline-flex;align-items:center;gap:7px;padding:8px 11px;border-radius:999px;background:rgba(255,92,24,.12);color:#c8420d;font-size:10px;font-weight:900;letter-spacing:.08em;text-transform:uppercase;margin-bottom:4px}@media(max-width:980px){.tradein-grid{grid-template-columns:1fr}}@media(max-width:680px){.tradein-copy,.tradein-form{padding:28px 20px}.trade-fields{grid-template-columns:1fr}.trade-fields .full{grid-column:auto}.detailgrid{grid-template-columns:1fr}.modalvisual img{min-height:300px}.modalcopy{max-height:none}}
+'''
+if '.tradein{' not in s:
+    s=s.replace('</style>',css+'</style>')
+
+trade='''
+<section class="section tradein" id="tradein"><div class="wrap tradein-grid"><div class="tradein-copy reveal"><div><div class="eyebrow" style="color:#fff">Araç Değerlendirme / Takas Talebi</div><h2>Mevcut aracın da bu konuşmanın bir parçası.</h2><p>Aracının temel bilgilerini gönder. Adventure Oto Galeri değerlendirsin; uygun görülürse takas veya satın alma seçenekleri doğrudan görüşülsün.</p></div><div><b style="font-size:24px">Fotoğraf + araç bilgisi + beklenti</b><p style="margin-bottom:0">Tek form, doğrudan WhatsApp görüşmesi.</p></div></div><div class="tradein-form reveal"><div class="trade-chip">Değerlendirme Talebi</div><h3>Aracını gönder</h3><p>Bu alan takasın kesin kabul edildiği anlamına gelmez; araç ve şartlar galeri tarafından değerlendirildikten sonra netleşir.</p><form onsubmit="sendTrade(event)"><div class="trade-fields"><input id="tradeBrand" placeholder="Marka / Model" required><input id="tradeYear" placeholder="Model yılı" required><input id="tradeKm" placeholder="Kilometre"><input id="tradeExpect" placeholder="Beklediğiniz değer"><input class="full" id="tradePlate" placeholder="Plaka durumu / kayıt bilgisi"><textarea class="full" id="tradeNote" placeholder="Kondisyon, hasar, paket, renk veya eklemek istediğiniz notlar"></textarea></div><button class="btn btn-hot" style="margin-top:14px" type="submit">WhatsApp ile Değerlendirmeye Gönder</button><div class="trade-note">Fotoğrafları WhatsApp konuşması açıldıktan sonra doğrudan galeriye ekleyebilirsiniz.</div></form></div></div></section>
+'''
+if 'id="tradein"' not in s:
+    s=s.replace('<section class="section finder" id="finder">',trade+'<section class="section finder" id="finder">')
+
+s=s.replace('<div class="modalvisual">AD</div>','<div class="modalvisual"><img id="mimg" src="assets/hilux.png" alt="Araç fotoğrafı"></div>')
+if 'id="mdetails"' not in s:
+    s=s.replace('<p id="mprice" style="font-weight:900;font-size:22px;color:#111"></p>','<p id="mprice" style="font-weight:900;font-size:22px;color:#111"></p><div class="detailgrid" id="mdetails"></div><div class="listing-note" id="mlisting"></div>')
+
+vehicle_js="""
+const vehicleData={
+ 'CFMOTO CFORCE 1000 Touring':{img:'assets/cforce1000.png',status:'0 KM',year:'2026',fuel:'Benzin',gear:'Otomatik',color:'Mavi-Açık',engine:'1000 cc',location:'Girne / Türk Mahallesi',listing:'İlan No 250739 • 27 Temmuz 2026',note:'İlan açıklamasında CF MOTO ATV CFORCE 1000 MV olarak belirtiliyor.'},
+ 'CFMOTO C Force 625 4x4':{img:'assets/cforce625.png',status:'0 KM',year:'2026',fuel:'Benzin',gear:'Otomatik',color:'İlanda belirtilmemiş',engine:'İlanda belirtilmemiş',location:'Girne',listing:'Adventure güncel portföyü',note:'2026 model C Force 625 4x4; fiyat için galeriyle iletişim kuruluyor.'},
+ 'CFMOTO C Force 520 L 4x4':{img:'assets/cforce520.png',status:'0 KM',year:'2026',fuel:'Benzin',gear:'Otomatik',color:'Turuncu',engine:'500 cc',location:'Girne / Türk Mahallesi',listing:'İlan No 250706 • 27 Temmuz 2026',note:'Güncel ilanda 0 KM, 500 cc ve turuncu renk olarak listeleniyor.'},
+ 'Toyota Hilux 2.8':{img:'assets/hilux.png',status:'İlan detayına göre',year:'2025',fuel:'İlanda belirtilmemiş',gear:'Otomatik',color:'İlanda belirtilmemiş',engine:'2.8',location:'Girne',listing:'Adventure güncel portföyü',note:'2025 model Toyota Hilux 2.8; portföyde birden fazla 2025 Hilux ilanı bulunuyor. Fiyat için galeriyle iletişim kuruluyor.'},
+ 'Can-Am Outlander':{img:'assets/outlander.png',status:'İkinci el',year:'2022',fuel:'İlanda belirtilmemiş',gear:'Otomatik',color:'İlanda belirtilmemiş',engine:'İlanda belirtilmemiş',location:'Girne',listing:'Adventure güncel portföyü',note:'Adventure portföyünde 2022 model olarak listeleniyor.'},
+ 'Toyota Yaris Cross':{img:'assets/yaris-cross.jpg',status:'İlan detayına göre',year:'2023',fuel:'İlanda belirtilmemiş',gear:'Otomatik',color:'İlanda belirtilmemiş',engine:'İlanda belirtilmemiş',location:'Girne',listing:'Adventure güncel portföyü',note:'Adventure portföyünde 2023 model otomatik SUV olarak listeleniyor.'}
+};
+"""
+if 'const vehicleData=' not in s:
+    s=s.replace("const header=document.getElementById('header');",vehicle_js+"const header=document.getElementById('header');")
+
+new="""function openVehicle(name,meta,price){const d=vehicleData[name]||{};mname.textContent=name;mmeta.textContent=meta;mprice.textContent=price;mimg.src=d.img||'assets/hilux.png';mimg.alt=name;const fields=[['Durum',d.status],['Model Yılı',d.year],['Yakıt',d.fuel],['Vites',d.gear],['Renk',d.color],['Motor',d.engine],['Konum',d.location],['Fiyat',price]];mdetails.innerHTML=fields.filter(x=>x[1]).map(x=>`<div class=\"detailitem\"><span>${x[0]}</span><b>${x[1]}</b></div>`).join('');mlisting.innerHTML=`<b>${d.listing||'Adventure Oto Galeri'}</b><br>${d.note||'Güncel bilgi ve kondisyon teyidi için galeriyle iletişim kurun.'}`;mwa.href='https://wa.me/905338525081?text='+encodeURIComponent('Merhaba, '+name+' hakkında detaylı bilgi almak istiyorum.');modal.classList.add('open')}"""
+if 'mdetails.innerHTML' not in s:
+    s=re.sub(r"function openVehicle\(name,meta,price\)\{.*?\}(?=\nlet use=|\nfunction )",new,s,flags=re.S)
+
+tradejs="""
+function sendTrade(e){e.preventDefault();const msg=`Merhaba, aracımı değerlendirme / olası takas için göndermek istiyorum. Marka/Model: ${tradeBrand.value}. Yıl: ${tradeYear.value}. KM: ${tradeKm.value||'belirtilmedi'}. Beklenti: ${tradeExpect.value||'belirtilmedi'}. Plaka/Kayıt: ${tradePlate.value||'belirtilmedi'}. Not: ${tradeNote.value||'yok'}. Fotoğrafları bu konuşmaya ekleyeceğim.`;window.open('https://wa.me/905338525081?text='+encodeURIComponent(msg),'_blank')}
+"""
+if 'function sendTrade(e)' not in s:
+    s=s.replace("addEventListener('keydown'",tradejs+"addEventListener('keydown'")
+
+p.write_text(s,encoding='utf-8')
