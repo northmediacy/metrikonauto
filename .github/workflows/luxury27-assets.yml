@@ -1,0 +1,68 @@
+name: Build Luxury 27 assets
+on:
+  push:
+    paths:
+      - 'luxury27/index.html'
+      - '.github/workflows/luxury27-assets.yml'
+permissions:
+  contents: write
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install parser
+        run: python -m pip install --quiet requests beautifulsoup4
+      - name: Download vehicle photos
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import requests
+          from bs4 import BeautifulSoup
+          from urllib.parse import urljoin
+          out=Path('luxury27/assets'); out.mkdir(parents=True,exist_ok=True)
+          s=requests.Session(); s.headers.update({'User-Agent':'Mozilla/5.0','Accept':'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,image/*,*/*;q=0.8'})
+          jobs={
+            'prado':{'direct':'https://www.dubicars.com/images/d3d034/w_1300x760/trass-motors/6496f2d4-c396-4f01-954a-ab7ab23a008d.jpg'},
+            'gle':{'direct':'https://usercontent.cdn.workleto.com/bcchauto/carstock/18423/689a2c3a4bf581754934330.jpg'},
+            'g400':{'page':'https://gebrauchtwagen.mercedes-benz.de/vehicle?680404_Mercedes-Benz_G_400_d=&language=en-GB&vehicle=18813492'},
+            'bmw320':{'page':'https://www.autovit.ro/autoturisme/anunt/bmw-seria-3-ver-320d-xdrive-aut-m-sport-ID7HPcYZ.html'},
+            'a4':{'page':'https://www.goluxuryauto.com/used/Audi/2023-Audi-A4-040f39baac180483df3059a1136d619a.htm'},
+            'mini':{'page':'https://www.arabam.com/ilan/galeriden-satilik-mini-cooper-1-5-signature/k-kartina-12-taksit-2023-mini-cooper-1-5-signature/35512023'},
+            'yaris':{'page':'https://www.autouncle.co.uk/en-gb/d/41740172-used-2023-toyota-yaris-hybrid-sport-116-bhp'},
+            'xc40':{'page':'https://commons.wikimedia.org/wiki/File:Volvo_XC40_CMA_white_(2).jpg'}
+          }
+          def choose(page):
+            r=s.get(page,timeout=35); r.raise_for_status(); soup=BeautifulSoup(r.text,'html.parser')
+            for attrs in [({'property':'og:image'}),({'name':'twitter:image'}),({'property':'og:image:secure_url'})]:
+              m=soup.find('meta',attrs=attrs)
+              if m and m.get('content'): return urljoin(page,m['content'])
+            for im in soup.find_all('img'):
+              src=im.get('src') or im.get('data-src') or im.get('data-lazy-src')
+              if src and not src.startswith('data:'): return urljoin(page,src)
+          for name,cfg in jobs.items():
+            try:
+              u=cfg.get('direct') or choose(cfg['page'])
+              print(name,u)
+              rr=s.get(u,timeout=40,headers={'Referer':cfg.get('page','https://www.google.com/')}); rr.raise_for_status()
+              ct=rr.headers.get('content-type','').lower(); ext='.jpg'
+              if 'png' in ct: ext='.png'
+              elif 'webp' in ct: ext='.webp'
+              p=out/(name+ext); p.write_bytes(rr.content)
+              if p.stat().st_size < 10000:
+                raise RuntimeError(f'too small {p.stat().st_size}')
+              if ext!='.jpg':
+                # keep path contract simple by copying bytes under jpg name only if jpeg; otherwise patch HTML
+                html=Path('luxury27/index.html').read_text(encoding='utf-8')
+                html=html.replace(f'assets/{name}.jpg',f'assets/{name}{ext}')
+                Path('luxury27/index.html').write_text(html,encoding='utf-8')
+              print('OK',name,p.stat().st_size)
+            except Exception as e:
+              print('FAIL',name,e)
+          PY
+      - name: Commit localized photos
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add luxury27
+          if git diff --cached --quiet; then echo 'No changes'; else git commit -m 'Add Luxury 27 vehicle photos'; git push; fi
