@@ -1,0 +1,23 @@
+name: Adventure upgrade v2
+on:
+  push:
+    paths:
+      - '.github/workflows/adventure-upgrade-v2.yml'
+permissions:
+  contents: write
+jobs:
+  upgrade:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python .github/scripts/adventure_upgrade.py
+      - run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add adventure/index.html
+          if git diff --cached --quiet; then
+            echo 'No changes'
+          else
+            git commit -m 'Add Adventure trade-in flow and detailed vehicle info'
+            git push
+          fi
