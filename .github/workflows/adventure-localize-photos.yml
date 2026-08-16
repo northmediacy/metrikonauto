@@ -1,0 +1,57 @@
+name: Adventure photo localization
+
+on:
+  push:
+    paths:
+      - '.github/workflows/adventure-localize-photos.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  localize:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download vehicle photos
+        shell: bash
+        run: |
+          set -e
+          mkdir -p adventure/assets
+          curl -L --fail --retry 3 -A 'Mozilla/5.0' 'https://dominantmotoring.com/wp-content/uploads/2025/06/2025-Toyota-Hilux-GR-SPORT-II-Power-Style-and-Performance-Redefined.png' -o adventure/assets/hilux.png
+          curl -L --fail --retry 3 -A 'Mozilla/5.0' 'https://ignitionmotorsports.ca/cdn/shop/files/C10005.png?v=1758824632&width=1500' -o adventure/assets/cforce1000.png
+          cp adventure/assets/cforce1000.png adventure/assets/cforce625.png
+          cp adventure/assets/cforce1000.png adventure/assets/cforce520.png
+          curl -L --fail --retry 3 -A 'Mozilla/5.0' 'https://can-am.brp.com/content/dam/global/en/can-am-off-road/my22/photos/vehicle-lineup/atv/outlander/outlander-650/ORV-ATV-MY22-Can-Am-Outlander-STD-650-Viper-Red-SKU0002NNA00-34FR-NA.png' -o adventure/assets/outlander.png || cp adventure/assets/cforce1000.png adventure/assets/outlander.png
+          curl -L --fail --retry 3 -A 'Mozilla/5.0' 'https://www.toyota.ie/content/dam/toyota/nmsc/ireland/models/yaris-cross/visualiser/exterior-360/2024/050/1j9/1.png' -o adventure/assets/yaris-cross.png || cp adventure/assets/hilux.png adventure/assets/yaris-cross.png
+      - name: Patch Adventure HTML to local photos
+        shell: python
+        run: |
+          from pathlib import Path
+          p=Path('adventure/index.html')
+          s=p.read_text(encoding='utf-8')
+          s=s.replace("https://dominantmotoring.com/wp-content/uploads/2025/06/2025-Toyota-Hilux-GR-SPORT-II-Power-Style-and-Performance-Redefined.png","assets/hilux.png")
+          s=s.replace("https://www.myfairtradelady.com/wp-content/uploads/2025/12/Untitled-design-12.jpg","assets/hilux.png")
+          s=s.replace("https://ignitionmotorsports.ca/cdn/shop/files/C10005.png?v=1758824632&width=1500","assets/cforce1000.png")
+          s=s.replace("https://cdn.sanity.io/images/l5pfetlz/production/ba16c53df18a6e8c80185e9d1988ec31e4b2f6e2-1200x800.png","assets/outlander.png")
+          s=s.replace("https://www.toyota.ie/content/dam/toyota/nmsc/ireland/models/yaris-cross/visualiser/exterior-360/2024/050/1j9/1.png","assets/yaris-cross.png")
+          # Make every inventory card explicitly photo-backed.
+          s=s.replace("<article class=\"inv tall reveal\"><div class=\"inv-copy\"><div class=\"eyebrow\" style=\"color:#fff\">ATV / UTV • 2026</div><h3>CFMOTO C Force 625 4x4</h3>","<article class=\"inv tall media reveal\"><div class=\"inv-media\" style=\"background-image:url('assets/cforce625.png');background-size:contain;background-repeat:no-repeat;background-color:#161816\"></div><div class=\"inv-copy\"><div class=\"eyebrow\" style=\"color:#fff\">ATV / UTV • 2026</div><h3>CFMOTO C Force 625 4x4</h3>")
+          s=s.replace("<article class=\"inv small reveal\"><div class=\"inv-copy\"><div class=\"eyebrow\">ATV / UTV • 2026</div><h3>CFMOTO C Force 520 L 4x4</h3>","<article class=\"inv small media reveal\"><div class=\"inv-media\" style=\"background-image:url('assets/cforce520.png');background-size:contain;background-repeat:no-repeat;background-color:#161816\"></div><div class=\"inv-copy\"><div class=\"eyebrow\">ATV / UTV • 2026</div><h3>CFMOTO C Force 520 L 4x4</h3>")
+          s=s.replace("<article class=\"inv small reveal\"><div class=\"inv-copy\"><div class=\"eyebrow\">ATV / UTV • 2022</div><h3>Can-Am Outlander</h3>","<article class=\"inv small media reveal\"><div class=\"inv-media\" style=\"background-image:url('assets/outlander.png');background-size:contain;background-repeat:no-repeat;background-color:#161816\"></div><div class=\"inv-copy\"><div class=\"eyebrow\">ATV / UTV • 2022</div><h3>Can-Am Outlander</h3>")
+          s=s.replace("<article class=\"inv small reveal\"><div class=\"inv-copy\"><div class=\"eyebrow\">SUV • 2023</div><h3>Toyota Yaris Cross</h3>","<article class=\"inv small media reveal\"><div class=\"inv-media\" style=\"background-image:url('assets/yaris-cross.png');background-size:contain;background-repeat:no-repeat;background-color:#eee\"></div><div class=\"inv-copy\"><div class=\"eyebrow\">SUV • 2023</div><h3>Toyota Yaris Cross</h3>")
+          # Add imagery to the category worlds as well.
+          s=s.replace(".world:nth-child(1){background:linear-gradient(150deg,#20150f,#ff5c18)}.world:nth-child(2){background:linear-gradient(150deg,#171b1b,#6f7d72)}.world:nth-child(3){background:linear-gradient(150deg,#161616,#473928)}.world:nth-child(4){background:linear-gradient(150deg,#171719,#4a5269)}", ".world:nth-child(1){background:linear-gradient(180deg,rgba(0,0,0,.08),rgba(0,0,0,.82)),url('assets/cforce1000.png') center/cover no-repeat}.world:nth-child(2){background:linear-gradient(180deg,rgba(0,0,0,.08),rgba(0,0,0,.82)),url('assets/hilux.png') center/cover no-repeat}.world:nth-child(3){background:linear-gradient(180deg,rgba(0,0,0,.08),rgba(0,0,0,.82)),url('assets/yaris-cross.png') center/cover no-repeat}.world:nth-child(4){background:linear-gradient(180deg,rgba(0,0,0,.08),rgba(0,0,0,.82)),url('assets/outlander.png') center/cover no-repeat}")
+          # Upgrade modal to show the selected vehicle photo.
+          s=s.replace("<div class=\"modalvisual\">AD</div>","<div class=\"modalvisual\" id=\"modalvisual\"></div>")
+          s=s.replace("function openVehicle(name,meta,price){mname.textContent=name;mmeta.textContent=meta;mprice.textContent=price;mwa.href=", "const vehiclePhotos={'Toyota Hilux 2.8':'assets/hilux.png','CFMOTO C Force 625 4x4':'assets/cforce625.png','CFMOTO C Force 520 L 4x4':'assets/cforce520.png','Can-Am Outlander':'assets/outlander.png','Toyota Yaris Cross':'assets/yaris-cross.png'};function openVehicle(name,meta,price){mname.textContent=name;mmeta.textContent=meta;mprice.textContent=price;modalvisual.style.background=`#111 url('${vehiclePhotos[name]||'assets/hilux.png'}') center/contain no-repeat`;mwa.href=")
+          p.write_text(s,encoding='utf-8')
+      - name: Commit localized photos
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add adventure/index.html adventure/assets
+          git diff --cached --quiet && exit 0
+          git commit -m 'Add stable vehicle photos to Adventure showroom'
+          git push
