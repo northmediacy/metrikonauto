@@ -1,0 +1,37 @@
+name: Build M Deniz Motors assets
+on:
+  push:
+    paths:
+      - '.github/workflows/mdeniz-assets.yml'
+permissions:
+  contents: write
+jobs:
+  assets:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download model-matched demo images
+        run: |
+          mkdir -p mdeniz/assets
+          python - <<'PY'
+          import requests, pathlib
+          files={
+            'fit':'https://commons.wikimedia.org/wiki/Special:Redirect/file/2020-2022%20Honda%20Fit%20e-HEV%20Home.jpg',
+            'yaris':'https://commons.wikimedia.org/wiki/Special:Redirect/file/Toyota%20Yaris%20Hybrid%20(2021)%20(52925177607).jpg',
+            'e300':'https://commons.wikimedia.org/wiki/Special:Redirect/file/Mercedes-Benz%20W213%20E%20300%204%20matic%20black%20(1).jpg',
+            'bmw':'https://commons.wikimedia.org/wiki/Special:Redirect/file/BMW%203-Series%20(G20)%20330i%20(2020)%20(52184513944).jpg',
+            'egea':'https://commons.wikimedia.org/wiki/Special:Redirect/file/Fiat%20Tipo%20Cross%201.5%20GSE%20Hybrid%20(II%2C%20Facelift)%20%E2%80%93%20f%2003102024.jpg',
+            'dmax':'https://commons.wikimedia.org/wiki/Special:Redirect/file/Isuzu%20D-Max%20Genf%202018.jpg'
+          }
+          s=requests.Session();s.headers.update({'User-Agent':'NorthMediaDemo/1.0'})
+          for name,url in files.items():
+            r=s.get(url,timeout=45); print(name,r.status_code,r.headers.get('content-type'),len(r.content)); r.raise_for_status()
+            if 'image' not in r.headers.get('content-type',''): raise RuntimeError(name+' did not return image')
+            pathlib.Path('mdeniz/assets',name+'.jpg').write_bytes(r.content)
+          PY
+      - name: Commit assets
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add mdeniz/assets
+          if git diff --cached --quiet; then echo nochange; else git commit -m 'Add M Deniz Motors demo vehicle images'; git push; fi
