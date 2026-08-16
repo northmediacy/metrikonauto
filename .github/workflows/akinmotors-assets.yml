@@ -18,14 +18,23 @@ jobs:
           curl -L --fail --retry 4 -A "$UA" -e 'https://www.kktcarabam.com/' 'https://www.kktcarabam.com/uploads/images/2026/04/24/16/702948-9889734160-69eb698bba3c6-900_675.jpg' -o akinmotors/assets/range.jpg
           sleep 2
           curl -L --fail --retry 4 -A "$UA" -e 'https://www.kktcarabam.com/' 'https://www.kktcarabam.com/uploads/images/2026/04/27/13/image-69ef3620d9493-900_675.jpg' -o akinmotors/assets/hilux.jpg
-          sleep 2
-          curl -L --fail --retry 4 -A "$UA" -e 'https://www.kktcarabam.com/' 'https://www.kktcarabam.com/uploads/images/2026/04/13/12/img-6338-69dcb37d2536b-900_675.jpg' -o akinmotors/assets/rav4.jpg
           file akinmotors/assets/*.jpg
-      - name: Commit assets
+      - name: Remove unverified RAV4 card from demo
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('akinmotors/index.html')
+          s=p.read_text(encoding='utf-8')
+          s=s.replace("<button data-f=\"Hibrit\">Hibrit</button>","")
+          start="{id:'rav4',name:'Toyota RAV4 2.0',year:'2023',km:'23.000 KM',fuel:'Benzin',gear:'Otomatik',body:'SUV',price:'£29.950',img:'assets/rav4.jpg',desc:'Yeşil renk, otomatik, 2.0 benzinli SUV.'}"
+          s=s.replace(','+start,'')
+          p.write_text(s,encoding='utf-8')
+          PY
+      - name: Commit assets and clean demo
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add akinmotors/assets
+          git add akinmotors
           git diff --cached --quiet && exit 0
-          git commit -m 'Add Akın Motors verified vehicle images'
+          git commit -m 'Finalize Akın Motors verified demo assets'
           git push
