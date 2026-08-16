@@ -1,0 +1,51 @@
+name: Unify Luxury 27 theme
+on:
+  push:
+    paths:
+      - '.github/workflows/luxury27-theme-unify.yml'
+permissions:
+  contents: write
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Apply cohesive Luxury 27 palette
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('luxury27/index.html')
+          s=p.read_text(encoding='utf-8')
+          override=r'''
+          /* Luxury 27 unified dark automotive palette */
+          :root{--ink:#f4f1ec;--paper:#0b0d10;--signal:#d92d3a;--line:rgba(255,255,255,.10)}
+          body{background:#0b0d10;color:#f4f1ec}
+          .top{background:rgba(11,13,16,.92);border-bottom-color:rgba(255,255,255,.10)}
+          .nav a{color:#f4f1ec;opacity:.68}.nav a:hover{opacity:1}.logotxt{color:#f4f1ec}
+          .pill{background:#f4f1ec;color:#0b0d10}.pill.red{background:#d92d3a;color:#fff}.ghost{border-color:rgba(255,255,255,.38);color:#f4f1ec;background:rgba(255,255,255,.02)}
+          .hero{background:#0b0d10;border-bottom-color:rgba(255,255,255,.10)}
+          .heroCopy{background:radial-gradient(circle at 12% 16%,rgba(217,45,58,.14),transparent 34%),#0b0d10}
+          .heroCopy p,.sectionHead p,.service p,.contactBox p,.statementCopy p{color:#a7adb5}
+          .heroVisual{background:#08090b}.heroVisual:after{background:linear-gradient(180deg,rgba(8,9,11,.02) 32%,rgba(8,9,11,.88) 100%)}
+          .facts{background:#111419;border-bottom:1px solid rgba(255,255,255,.08)}.fact{border-right-color:rgba(255,255,255,.08)}.fact span{color:#9fa5ae}
+          .section{background:#0b0d10}.filters button{color:#d9dde2;border-color:rgba(255,255,255,.13);background:#111419}.filters button:hover{border-color:rgba(217,45,58,.6)}.filters button.on{background:#d92d3a;color:#fff;border-color:#d92d3a}
+          .car{background:#12151a;border-color:rgba(255,255,255,.09);box-shadow:0 12px 35px rgba(0,0,0,.18)}.car:hover{box-shadow:0 24px 55px rgba(0,0,0,.36)}.carImg{background:#181c22}.car h3,.price,.detail{color:#f4f1ec}.meta{color:#9da3ac}.detail{text-decoration-color:#d92d3a}
+          .statement{background:#111419}.statementCopy{background:linear-gradient(135deg,#15191f 0%,#101318 100%)}.statementCopy h2{color:#f4f1ec}
+          .serviceGrid{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.08)}.service{background:#12151a}.service h3{color:#f4f1ec}
+          .leadSection{background:radial-gradient(circle at 75% 15%,rgba(217,45,58,.11),transparent 30%),#090b0e}.leadGrid p{color:#a7adb5}.formCard{background:#101318;border-color:rgba(255,255,255,.11)}.formCard input,.formCard textarea{background:#171b21;border-color:rgba(255,255,255,.10);color:#f4f1ec}.formCard input::placeholder,.formCard textarea::placeholder{color:#747b85}
+          .contactBox{background:#12151a;border-color:rgba(255,255,255,.09)}.contactBox h3{color:#f4f1ec}.footer{border-top-color:rgba(255,255,255,.09);color:#878e98;background:#090b0e}
+          .modal{background:rgba(0,0,0,.82)}.modalBox{background:#12151a;color:#f4f1ec;box-shadow:0 35px 100px rgba(0,0,0,.5)}.spec{border-top-color:rgba(255,255,255,.10)}.spec span{color:#8f969f}.close{background:#d92d3a;color:#fff}
+          .mobilebar{background:rgba(9,11,14,.96);border:1px solid rgba(255,255,255,.08);box-shadow:0 12px 40px rgba(0,0,0,.45)}
+          ::selection{background:#d92d3a;color:#fff}
+          '''
+          if '/* Luxury 27 unified dark automotive palette */' not in s:
+              s=s.replace('</style>',override+'</style>',1)
+          p.write_text(s,encoding='utf-8')
+          PY
+      - name: Commit
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add luxury27/index.html
+          git commit -m 'Unify Luxury 27 visual theme' || exit 0
+          git push
